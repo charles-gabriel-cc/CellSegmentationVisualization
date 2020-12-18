@@ -1,0 +1,75 @@
+.after-upload-container{
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-container{
+    margin-top: 1rem;
+    width: 65%;
+    height: 80%;
+    background-color: var(--color-dark-darker);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.results-container{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 90%;
+    height: 90%;
+    background-color: var(--color-dark-darker);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.loading-container h1{
+    font-size: 2rem;
+    color: white;
+}
+
+.loading-container h2{
+    color: white;
+    margin-top: 1rem;
+}
+
+.results-card{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-in;
+}
+
+.results-card h1{
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.results-card img{
+    border: solid 2px white;
+    border-radius: 10px;
+    width: 320px;
+    height: 320px;
+}
+
+.second-card{
+    margin-right: 96px;
+}
+
+.gear-icon{
+    position: absolute;
+    top: 112px;
+    right: calc(5% + 5px);
+}

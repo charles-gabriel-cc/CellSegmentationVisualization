@@ -1,0 +1,39 @@
+.navbar{
+    width: 100vw;
+    height: 64px;
+    background-color: var(--color-dark-darker);
+    display: flex;
+    align-items: center;
+}
+
+.navbar img{
+    width: 54px;
+    margin-left: 1rem;
+}
+
+.nav-title{
+    display: flex;
+    height: 100%;
+    margin: 0 2rem;
+    align-items: center;
+}
+
+.navbar h1{
+    display: inline;
+    font: 42px Montserrat, sans-serif;
+    color: white;
+}
+
+.navbar a{
+    color: inherit;
+}
+
+.nav-icons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-icon{
+    margin: 0 1rem;
+}
