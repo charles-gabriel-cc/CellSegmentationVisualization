@@ -3,6 +3,7 @@ import ReactImageMagnify from 'react-image-magnify'
 
 import ZoomModal from '../../components/ZoomModal/ZoomModal.js'
 import ProgressBar from '../ProgressBar/ProgressBar'
+import Combobox from '../Combobox/Combobox.js'
 
 import loading from '../../assets/loading.svg'
 
@@ -40,34 +41,9 @@ const AfterUpload = (props) => {
                     <div className="gear-icon">
                         <ZoomModal handleClose={handleClose} open={open} updateZoomArea={updateZoomArea} zoomArea={zoomArea} />
                         <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
+                        <Combobox></Combobox>
                     </div>
                     <div className="results-card">
-                        <h1>Original Image</h1>
-                        <ReactImageMagnify {...{
-                            smallImage: {
-                                alt: 'Cell image',
-                                width: 320,
-                                height: 320,
-                                src: API_IMAGE_ENDPOINT + props.imageId + '/' + 0
-                            },
-                            largeImage: {
-                                src: API_IMAGE_ENDPOINT + props.imageId + '/' + 0,
-                                width: 640,
-                                height: 640
-                            },
-                            enlargedImageContainerDimensions: {
-                                width: `${zoomArea}%`,
-                                height: `${zoomArea}%`
-                            },
-                            style: {
-                                cursor: "zoom-in"
-                            },
-                            enlargedImageContainerStyle: {
-                                borderRadius: "10px"
-                            },
-                        }} />
-                    </div>
-                    <div className="results-card second-card">
                         <h1>Segmented Image</h1>
                         <ReactImageMagnify {...{
                             smallImage: {
