@@ -62,7 +62,7 @@ const AfterUpload = (props) => {
                         <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
                     </div>
                     <div className="combobox">
-                    <Combobox updateType={updateType} type={state.type}/>
+                    <Combobox updateType={updateType} type={state}/>
                     </div>
                     <div className="results-card">
                         <ReactImageMagnify {...{
