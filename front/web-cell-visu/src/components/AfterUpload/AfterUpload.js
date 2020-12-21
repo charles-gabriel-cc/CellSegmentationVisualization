@@ -20,9 +20,28 @@ const AfterUpload = (props) => {
     const [ zoomArea, setZoomArea ] = useState(25)
     const handleClose = () => setOpen(false)
     const handleOpen = () => setOpen(true)
+    const [zoomRate, setZoomRate ] = useState({
+        rate: 640
+    })
+
+    const [state, setState] = React.useState(1);
+    
+    const segmentationType = [
+        'Original Image',
+        'Segmented Image',
+        'Segmentation',
+        'Segmentation',
+        'Segmentation',
+        'Segmentation',
+        'Segmentation'
+    ]
 
     const updateZoomArea = (newValue) => {
         setZoomArea(newValue)
+    }
+
+    function updateType(newValue){
+        setState(newValue)
     }
 
     return(
@@ -41,21 +60,22 @@ const AfterUpload = (props) => {
                     <div className="gear-icon">
                         <ZoomModal handleClose={handleClose} open={open} updateZoomArea={updateZoomArea} zoomArea={zoomArea} />
                         <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
-                        <Combobox></Combobox>
+                    </div>
+                    <div className="combobox">
+                    <Combobox updateType={updateType} type={state.type}/>
                     </div>
                     <div className="results-card">
-                        <h1>Segmented Image</h1>
                         <ReactImageMagnify {...{
                             smallImage: {
                                 alt: 'Cell image',
-                                width: 320,
-                                height: 320,
-                                src: API_IMAGE_ENDPOINT + props.imageId + '/' + 1
+                                width: 470,
+                                height: 470,
+                                src: API_IMAGE_ENDPOINT + props.imageId + '/' + state
                             },
                             largeImage: {
-                                src: API_IMAGE_ENDPOINT + props.imageId + '/' + 1,
-                                width: 640,
-                                height: 640
+                                src: API_IMAGE_ENDPOINT + props.imageId + '/' + state,
+                                width: zoomRate.rate,
+                                height: zoomRate.rate
                             },
                             enlargedImageContainerDimensions: {
                                 width: `${zoomArea}%`,

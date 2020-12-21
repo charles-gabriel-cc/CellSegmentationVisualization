@@ -19,10 +19,21 @@
     border: 2px solid white;
 }
 
+.combobox{
+    position: absolute;
+    color: white;
+    background-color: var(--color-dark-darker);
+    border-radius: 5px;
+    border: 2px solid white;
+    right: 15%;
+    top: 5%;
+}
+
 .results-container{
+    position: relative;
     margin-top: 1rem;
     margin-left: 1rem;
-    width: 90%;
+    width: 75%;
     height: 90%;
     background-color: var(--color-dark-darker);
     display: flex;
@@ -44,15 +55,19 @@
 }
 
 .results-card{
+    position: absolute;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: zoom-in;
+    left: 3%;
+    top: 3%;
 }
 
 .results-card h1{
+    font-size: 1.5rem;
     margin-bottom: 1rem;
     color: white;
 }
@@ -64,12 +79,8 @@
     height: 320px;
 }
 
-.second-card{
-    margin-right: 96px;
-}
-
 .gear-icon{
     position: absolute;
-    top: 112px;
+    top: 5%;
     right: calc(5% + 5px);
 }

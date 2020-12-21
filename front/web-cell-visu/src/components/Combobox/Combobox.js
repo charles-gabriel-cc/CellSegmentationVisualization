@@ -1,46 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react'	
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
-  
-  export default function NativeSelects() {
-    const classes = useStyles();
-    const [state, setState] = React.useState({
-      age: '',
-      name: 'hai',
-    });
-  
-    const handleChange = (event) => {
-      const name = event.target.name;
-      setState({
-        ...state,
-        [name]: event.target.value,
-      });
-    };
-  
-    return (
-      <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel>Segmentation Type</InputLabel>
-          <Select
-            native
-            onChange={handleChange}
-          >
-            <option value={0}>Original Image</option>
-            <option value={1}>Segmented Image</option>
-          </Select>
+const Combobox = (props) => {
+	const useStyles = makeStyles((theme) => ({
+		formControl: {
+			margin: theme.spacing(1),
+			minWidth: 120,
+			color: 'white'
+		},
+		inputLabel: {
+			color: 'white',
+
+		},
+		inputOption: {
+			color: 'black'
+		},
+		select: {
+			color: 'white',
+			'&:before': {
+				borderColor: 'white',
+			},
+			'&:after': {
+				borderColor: 'white',
+			}
+		},
+		icon: {
+			fill: 'white',
+		},
+	}))
+
+	const classes = useStyles();
+
+	const handleChange = (event) => {	
+		props.updateType(event.target.value);
+	};
+	
+	return (
+		<FormControl className={classes.formControl}>
+			<h3 className={classes.inputLabel}>Segmentation Type:</h3>
+			<Select 
+				className={classes.select}
+				native
+				value={props.type}
+				onChange={handleChange}
+				inputProps = {{
+					name: 'type',
+					id: 'segmentation-type',
+					classes: {
+						icon: classes.icon,
+					},
+				}}
+			>   
+				<option className={classes.inputOption} value={'0'}>Original Image</option>
+				<option className={classes.inputOption} value={'1'}>Segmented Image</option>
+				<option className={classes.inputOption} value={'2'}>Segmentation</option>
+				<option className={classes.inputOption} value={'3'}>Other Image</option>
+				<option className={classes.inputOption} value={'4'}>Other Image</option>
+				<option className={classes.inputOption} value={'5'}>Other Image</option>
+				<option className={classes.inputOption} value={'6'}>Other Image</option>
+			</Select>
         </FormControl>
-        </div>
-        );
-    }
+	);
+}
+
+export default Combobox;
