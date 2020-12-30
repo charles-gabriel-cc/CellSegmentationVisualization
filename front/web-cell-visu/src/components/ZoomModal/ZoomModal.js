@@ -9,6 +9,10 @@ const ZoomModal = (props) => {
         props.updateZoomArea(value)
     }
 
+    const handleOther = (e, value) => {
+        props.updateZoomRate(value)
+    }
+
     return(
         <Modal open={props.open} onClose={props.handleClose} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
             <div className="inner-modal-container">
@@ -24,9 +28,21 @@ const ZoomModal = (props) => {
                         onChange={handleChange}
                     />
                 </div>
+                <h5>Zoom Rate</h5>
+                <div className="custom-slider-container">
+                    <Slider
+                        min={500}
+                        defaultValue={640}
+                        value={props.zoomRate}
+                        step={1}
+                        max={2000}
+                        color='primary'
+                        onChange={handleOther}
+                    />
+                </div>
             </div>
         </Modal>
     )
 }
-
+    
 export default ZoomModal;

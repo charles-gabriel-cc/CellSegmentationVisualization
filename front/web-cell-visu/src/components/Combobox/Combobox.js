@@ -13,10 +13,9 @@ const Combobox = (props) => {
 		},
 		inputLabel: {
 			color: 'white',
-
 		},
 		inputOption: {
-			color: 'black'
+			color: 'black',
 		},
 		select: {
 			color: 'white',
@@ -59,8 +58,6 @@ const Combobox = (props) => {
 				<option className={classes.inputOption} value={'2'}>Segmentation</option>
 				<option className={classes.inputOption} value={'3'}>Other Image</option>
 				<option className={classes.inputOption} value={'4'}>Other Image</option>
-				<option className={classes.inputOption} value={'5'}>Other Image</option>
-				<option className={classes.inputOption} value={'6'}>Other Image</option>
 			</Select>
         </FormControl>
 	);

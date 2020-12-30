@@ -1,4 +1,5 @@
 .after-upload-container{
+    position: relative;
     height: 85vh;
     width: 100vw;
     display: flex;
@@ -18,30 +19,42 @@
     border-radius: 10px;
     border: 2px solid white;
 }
-
-.combobox{
+.features{
     position: absolute;
+    right: 0;
+    top: 0;
+    float: left;
+    width: 35%;
+    height: 40%;
+    border-radius: 10px;
+    border: 2px solid white;
+    align-items: center;
+    background-color: var(--color-dark-darker);
+}
+.combobox{
+    position: relative;
     color: white;
     background-color: var(--color-dark-darker);
     border-radius: 5px;
     border: 2px solid white;
-    right: 15%;
+    width: 50%;
+    left: 3%;
     top: 5%;
 }
 
+.download{
+    position: absolute;
+    top: 5%;
+    right: 25%;
+}
+
 .results-container{
-    position: relative;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    width: 75%;
-    height: 90%;
-    background-color: var(--color-dark-darker);
+    position: absolute;
+    width: 85%;
+    height: 80%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
-    border-radius: 10px;
-    border: 2px solid white;
 }
 
 .loading-container h1{
@@ -56,14 +69,7 @@
 
 .results-card{
     position: absolute;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     cursor: zoom-in;
-    left: 3%;
-    top: 3%;
 }
 
 .results-card h1{
@@ -75,12 +81,39 @@
 .results-card img{
     border: solid 2px white;
     border-radius: 10px;
-    width: 320px;
-    height: 320px;
 }
 
-.gear-icon{
+.cellImage {
+    max-width: 600px;
+    max-height: 500px;
+}
+.gear-icon {
     position: absolute;
     top: 5%;
-    right: calc(5% + 5px);
+    right: 5%;
+}
+
+.carousel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    float: left;
+    width: 35%;
+    height: 45%;
+    border-radius: 10px;
+    border: 2px solid white;
+    align-items: center;
+    background-color: var(--color-dark-darker);
+}
+@media screen and (max-width: 1000px) {
+    .results-card {
+        top: 20%;
+        left: 0;
+    }
+    .features {
+        width: 100%;
+        top: 3%;
+        left: 0;
+        height: 15%;
+    }
 }

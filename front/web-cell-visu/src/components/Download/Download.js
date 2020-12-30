@@ -1,40 +1,28 @@
-
 import React from 'react';
-import './download.css';
+import { BsDownload }from 'react-icons/bs'
 
-class DownloadFile extends React.Component {
-	
-	constructor(props) {
-		super(props);
-	}
-	
-	downloadEmployeeData = () => {
-		fetch('http://localhost:5000/result/image/')
+const Download = (props) => {
+
+	const downloadEmployeeData = () => {
+		fetch(props.route)
 			.then(response => {
 				response.blob().then(blob => {
 					let url = window.URL.createObjectURL(blob);
 					let a = document.createElement('a');
 					a.href = url;
-					a.download = 'employees.json';
+					a.download = `${props.imageId}.png`;
 					a.click();
 				});
-				//window.location.href = response.url;
 		});
 	}
-	
-	render() {
-		return (
-			<div id="container">
-				<h1>Download File using React App</h1>
-				<h3>Download Employee Data using Button</h3>
-				<button onClick={this.downloadEmployeeData}>Download</button>
-				<p/>
-				<h3>Download Employee Data using Link</h3>
-				<a href="#" onClick={this.downloadEmployeeData}>Download</a>
-			</div>
-		)
-	}
-
+	return (
+		<button onClick={downloadEmployeeData}>
+			<BsDownload
+				size={54} 
+				color={"white"} 
+				style={{backgroundColor: "transparent"}}
+			/>
+		</button>
+	)
 }
-
-export default DownloadFile;
+export default Download;

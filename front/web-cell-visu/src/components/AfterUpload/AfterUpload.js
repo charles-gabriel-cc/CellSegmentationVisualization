@@ -4,6 +4,7 @@ import ReactImageMagnify from 'react-image-magnify'
 import ZoomModal from '../../components/ZoomModal/ZoomModal.js'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import Combobox from '../Combobox/Combobox.js'
+import Download from '../Download/Download.js'
 
 import loading from '../../assets/loading.svg'
 
@@ -15,16 +16,16 @@ import './AfterUpload.css'
 const AfterUpload = (props) => {
 
     const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
-
     const [ open, setOpen ] = useState(false)
     const [ zoomArea, setZoomArea ] = useState(25)
     const handleClose = () => setOpen(false)
     const handleOpen = () => setOpen(true)
-    const [zoomRate, setZoomRate ] = useState({
-        rate: 640
-    })
+    const [zoomRate, setZoomRate ] = useState(640)
+    const myRef = React.createRef()
 
     const [state, setState] = React.useState(1);
+    
+    const route = API_IMAGE_ENDPOINT + props.imageId + '/' + state
     
     const segmentationType = [
         'Original Image',
@@ -40,13 +41,22 @@ const AfterUpload = (props) => {
         setZoomArea(newValue)
     }
 
+    const updateZoomRate = (newValue) => {
+        setZoomRate(newValue)
+    }
     function updateType(newValue){
         setState(newValue)
     }
 
+    function onScroll(){
+        const scrollTop = myRef.current.scrollTop + 640
+        console.log("Scrolltop")
+        this.setZoomRate(scrollTop)
+    }
+      
     return(
         <div className="after-upload-container" style={{display: "flex", flexDirection: "row"}}>
-            <button onClick={() => props.resetStates()} style={{margin: "0rem", position: "absolute", top: "72px", left: "8px"}}>
+            <button onClick={() => props.resetStates()} style={{margin: "0rem", position: "absolute", top: "0", left: "8px"}}>
                 <FiCornerUpLeft size={54} color={"white"} style={{backgroundColor: "transparent"}}/>
             </button>
             {!props.pollingState ?
@@ -57,25 +67,39 @@ const AfterUpload = (props) => {
                 </div>
             :
                 <div className="results-container">
-                    <div className="gear-icon">
-                        <ZoomModal handleClose={handleClose} open={open} updateZoomArea={updateZoomArea} zoomArea={zoomArea} />
-                        <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
+                    <div className="features">
+                        <div className="gear-icon">
+                            <ZoomModal 
+                                handleClose={handleClose} 
+                                open={open} 
+                                updateZoomArea={updateZoomArea} 
+                                zoomArea={zoomArea} 
+                                zoomRate={zoomRate}
+                                updateZoomRate={updateZoomRate}
+                            />
+                            <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
+                        </div>
+                        <div className="combobox">
+                            <Combobox updateType={updateType} type={state}/>
+                        </div>
+                        <div className="download">
+                            <Download route={route} imageId={props.imageId}/>
+                        </div>
                     </div>
-                    <div className="combobox">
-                    <Combobox updateType={updateType} type={state}/>
+                    <div className="carousel">
+
                     </div>
-                    <div className="results-card">
+                    <div className="results-card" onScroll={onScroll} ref={myRef}>
                         <ReactImageMagnify {...{
                             smallImage: {
                                 alt: 'Cell image',
-                                width: 470,
-                                height: 470,
+                                isFluidWidth: true,
                                 src: API_IMAGE_ENDPOINT + props.imageId + '/' + state
                             },
                             largeImage: {
                                 src: API_IMAGE_ENDPOINT + props.imageId + '/' + state,
-                                width: zoomRate.rate,
-                                height: zoomRate.rate
+                                width: zoomRate,
+                                height: zoomRate
                             },
                             enlargedImageContainerDimensions: {
                                 width: `${zoomArea}%`,
@@ -87,6 +111,9 @@ const AfterUpload = (props) => {
                             enlargedImageContainerStyle: {
                                 borderRadius: "10px"
                             },
+                            imageClassName: "cellImage",
+                            isHintEnabled: true,
+                            shouldHideHintAfterFirstActivation: false
                         }} />
                     </div>
                 </div>
