@@ -20,7 +20,7 @@ const ZoomModal = (props) => {
                 <div className="custom-slider-container">
                     <Slider
                         min={20}
-                        defaultValue={25}
+                        defaultValue={45}
                         value={props.zoomArea}
                         step={1}
                         max={70}

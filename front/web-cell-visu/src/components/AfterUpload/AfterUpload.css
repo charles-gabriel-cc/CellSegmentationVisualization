@@ -20,30 +20,28 @@
     border: 2px solid white;
 }
 .features{
-    position: absolute;
-    right: 0;
-    top: 0;
-    float: left;
-    width: 35%;
-    height: 40%;
+    position: relative;
     border-radius: 10px;
     border: 2px solid white;
-    align-items: center;
     background-color: var(--color-dark-darker);
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: 1rem;
 }
 .combobox{
-    position: relative;
     color: white;
     background-color: var(--color-dark-darker);
     border-radius: 5px;
     border: 2px solid white;
-    width: 50%;
-    left: 3%;
-    top: 5%;
+    height: 12vh;
+    width: 15vw;
 }
 
 .download{
-    position: absolute;
     top: 5%;
     right: 25%;
 }
@@ -55,6 +53,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 .loading-container h1{
@@ -68,8 +67,14 @@
 }
 
 .results-card{
-    position: absolute;
+    position: relative;
     cursor: zoom-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    z-index: 1;
 }
 
 .results-card h1{
@@ -84,25 +89,31 @@
 }
 
 .cellImage {
-    max-width: 600px;
-    max-height: 500px;
+    max-width: 50vw;
+    max-height: 75vh;
 }
+
 .gear-icon {
-    position: absolute;
     top: 5%;
     right: 5%;
 }
+.controlPanel {
+    width: 35vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .carousel {
-    position: absolute;
-    right: 0;
-    bottom: 0;
     float: left;
-    width: 35%;
-    height: 45%;
+    width: 100%;
+    height: 50vh;
     border-radius: 10px;
     border: 2px solid white;
     align-items: center;
+    margin: 1rem;
     background-color: var(--color-dark-darker);
 }
 @media screen and (max-width: 1000px) {
