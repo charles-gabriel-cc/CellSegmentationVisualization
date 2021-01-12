@@ -4,18 +4,24 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 const Combobox = (props) => {
 	const useStyles = makeStyles((theme) => ({
+		root: {
+			fontSize: 18,
+			font: 'initial',
+		},
 		formControl: {
 			margin: theme.spacing(1),
 			minWidth: 120,
 			color: 'white'
 		},
-		inputLabel: {
-			color: 'white',
-		},
 		inputOption: {
 			color: 'black',
+			fontSize: 18
+		},
+		inputLabel: {
+			color: 'white',
 		},
 		select: {
 			color: 'white',
@@ -29,6 +35,17 @@ const Combobox = (props) => {
 		icon: {
 			fill: 'white',
 		},
+		'@media (max-width: 1000px)' : {
+			root: {
+				fontSize: 50,
+			},
+			inputLabel: {
+				fontSize: 50
+			},
+			icon: {
+				fontSize: 35
+			}
+		}
 	}))
 
 	const classes = useStyles();
@@ -39,7 +56,7 @@ const Combobox = (props) => {
 	
 	return (
 		<FormControl className={classes.formControl}>
-			<h3 className={classes.inputLabel}>Segmentation Type:</h3>
+			<h3 className={classes.inputLabel}>Choose a mask:</h3>
 			<Select 
 				className={classes.select}
 				native
@@ -50,14 +67,16 @@ const Combobox = (props) => {
 					id: 'segmentation-type',
 					classes: {
 						icon: classes.icon,
+						root: classes.root
 					},
 				}}
-			>   
-				<option className={classes.inputOption} value={'0'}>Original Image</option>
-				<option className={classes.inputOption} value={'1'}>Segmented Image</option>
+			>   "option"
+				<option className={classes.inputOption} value={'0'}></option>
+				<option className={classes.inputOption} value={'4'}>Boundary</option>
+				<option className={classes.inputOption} value={'5'}>Bound Overlay</option>	
+				<option className={classes.inputOption} value={'3'}>Instances RGB</option>
+				<option className={classes.inputOption} value={'1'}>Object Overlay</option>
 				<option className={classes.inputOption} value={'2'}>Segmentation</option>
-				<option className={classes.inputOption} value={'3'}>Other Image</option>
-				<option className={classes.inputOption} value={'4'}>Other Image</option>
 			</Select>
         </FormControl>
 	);

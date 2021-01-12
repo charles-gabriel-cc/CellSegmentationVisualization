@@ -1,10 +1,15 @@
 .after-upload-container{
-    position: relative;
     height: 85vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.leftArrow {
+    position: fixed;
+    top: 5rem;
+    left: 8px
 }
 
 .loading-container{
@@ -29,7 +34,8 @@
     display: flex;
     align-items: top;
     justify-content: space-between;
-    padding: 1rem;
+    align-items: center;
+    padding: 1.5rem;
     margin: 1rem;
 }
 .combobox{
@@ -38,7 +44,7 @@
     border-radius: 5px;
     border: 2px solid white;
     height: 12vh;
-    width: 15vw;
+    width: 12vw;
 }
 
 .download{
@@ -114,17 +120,46 @@
     border: 2px solid white;
     align-items: center;
     margin: 1rem;
-    background-color: var(--color-dark-darker);
 }
 @media screen and (max-width: 1000px) {
-    .results-card {
-        top: 20%;
-        left: 0;
+    .results-container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: normal;
     }
-    .features {
-        width: 100%;
-        top: 3%;
-        left: 0;
-        height: 15%;
+    .cellImage{
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+    .controlPanel{
+        width: 95%;
+        height: 20%;
+        align-items: center;
+    }
+    .carousel {
+        display: none;
+    }
+    .leftArrow{
+        top: 15rem;
+    }
+    .combobox{
+        width: 55%;
+        height: 75%;
+        margin-right: 3rem;
+        padding: 1rem;
+        border: 6px solid white;
+    }
+    .gear-icon{
+        display: none;
+    }
+    .features{
+        padding: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 6px solid white;
+    }
+    .download{
+        margin-left: 3rem;
     }
 }

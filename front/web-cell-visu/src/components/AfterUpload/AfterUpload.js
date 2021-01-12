@@ -25,16 +25,6 @@ const AfterUpload = (props) => {
     const [state, setState] = React.useState(1);
     
     const route = API_IMAGE_ENDPOINT + props.imageId + '/' + state
-    
-    const segmentationType = [
-        'Original Image',
-        'Segmented Image',
-        'Segmentation',
-        'Segmentation',
-        'Segmentation',
-        'Segmentation',
-        'Segmentation'
-    ]
 
     const updateZoomArea = (newValue) => {
         setZoomArea(newValue)
@@ -46,19 +36,30 @@ const AfterUpload = (props) => {
     function updateType(newValue){
         setState(newValue)
     }
+    /*
+    const img = new Image()
+    img.onload = function() {
+        width = img.width
+        height = img.height
+        console.log(img.width)
+        console.log(img.height)
+    }
+    img.src = API_IMAGE_ENDPOINT + props.imageId + '/' + state;
+    */
     // 
     function handleZoom(e) {
-        if (e.deltaY < 0 && zoomRate < 2000){
+        if (e.deltaY < 0 && zoomRate < 2000) {
             setZoomRate(zoomRate + 80)
         }
-        else if (e.deltaY > 0 && zoomRate > 500){
+        else if (e.deltaY > 0 && zoomRate > 500) {
             setZoomRate(zoomRate - 80)
         }
     }
     //
+    const url = API_IMAGE_ENDPOINT + props.imageId + '/' + 0;
     return(
         <div className="after-upload-container" style={{display: "flex", flexDirection: "row"}}>
-            <button onClick={() => props.resetStates()} style={{margin: "0rem", position: "absolute", top: "0", left: "8px"}}>
+            <button onClick={() => props.resetStates()} className="leftArrow">
                 <FiCornerUpLeft size={54} color={"white"} style={{backgroundColor: "transparent"}}/>
             </button>
             {!props.pollingState ?
@@ -92,10 +93,8 @@ const AfterUpload = (props) => {
                                 borderRadius: "10px"
                             },
                             imageClassName: "cellImage",
-                            //enlargedImageClassName: "enlargedcellImage",
-                            isHintEnabled: true,
-                            shouldHideHintAfterFirstActivation: false,
-                            enlargedImageClassName: "enlargedcellImage"
+                            //isHintEnabled: true,
+                            //shouldHideHintAfterFirstActivation: false,
                         }} />
                     </div>
                     <div className="controlPanel">
@@ -118,9 +117,7 @@ const AfterUpload = (props) => {
                                 <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
                             </div>
                         </div>
-                        <div className="carousel">
-
-                        </div>
+                        <img src={url} className="carousel"/>
                     </div>
                 </div>
             }

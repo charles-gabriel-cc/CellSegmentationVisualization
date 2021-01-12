@@ -1,0 +1,9 @@
+.downloadIcon{
+    font-size: 54px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .downloadIcon {
+      font-size: 10vmax;
+    }
+  }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsDownload }from 'react-icons/bs'
+import './Download.css'
 
 const Download = (props) => {
 
@@ -18,9 +19,8 @@ const Download = (props) => {
 	return (
 		<button onClick={downloadEmployeeData}>
 			<BsDownload
-				size={54} 
 				color={"white"} 
-				style={{backgroundColor: "transparent"}}
+				className="downloadIcon"
 			/>
 		</button>
 	)
