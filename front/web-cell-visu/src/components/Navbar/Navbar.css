@@ -37,3 +37,19 @@
 .nav-icon{
     margin: 0 1rem;
 }
+
+.resizeIcons {
+    font-size: 34px;
+}
+@media only screen and (max-width: 1000px) {
+    .resizeIcons {
+        font-size: 6vmax;
+    }
+    .navbar img {
+        font-size: 10vmax;
+        width: 12vw;
+    }
+    .nav-title h1 {
+        font-size: 6vmax;
+    }
+}

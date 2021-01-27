@@ -38,13 +38,14 @@ const Combobox = (props) => {
 		'@media (max-width: 1000px)' : {
 			root: {
 				fontSize: 50,
+				
 			},
 			inputLabel: {
 				fontSize: 50
 			},
 			icon: {
 				fontSize: 35
-			}
+			},
 		}
 	}))
 
@@ -67,10 +68,10 @@ const Combobox = (props) => {
 					id: 'segmentation-type',
 					classes: {
 						icon: classes.icon,
-						root: classes.root
+						root: classes.root,
 					},
 				}}
-			>   "option"
+			>   
 				<option className={classes.inputOption} value={'0'}></option>
 				<option className={classes.inputOption} value={'4'}>Boundary</option>
 				<option className={classes.inputOption} value={'5'}>Bound Overlay</option>	

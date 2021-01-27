@@ -4,11 +4,14 @@ import {useDropzone} from 'react-dropzone'
 
 import { BsUpload } from 'react-icons/bs'
 
+import './UploadDropzone.css'
+
 const UploadDropzone = (props) => {
 
     const uploadData = (file) => {
         const formData = new FormData()
         formData.append('image', file)
+        formData.append('model', props.model)
         formData.append('gpu', false)
 
         const options = {
@@ -34,33 +37,24 @@ const UploadDropzone = (props) => {
             uploadData(file)
         }
     }, [])
+
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
-    const customStyle={
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        border: "none",
-        textAlign: "center",
-    }
-
     return (
-    <div {...getRootProps()} style={customStyle}>
-        <input {...getInputProps()} />
-        <BsUpload size={160} color={"white"} style={{marginBottom: "2rem"}}/>
-        {
-        isDragActive ?
-            <div className="upload-help-text">
-                <h2>Drop the images here, or select one example image</h2>
-            </div> :
-            <div className="upload-help-text">
-                <h2>Drag 'n' drop some image here, or click to select an example image</h2>
-            </div>
-        }
-    </div>
+        <div {...getRootProps()} className="upload-container" data-toggle="tooltip" title={"Try to choose a model before upload"}> 
+            <input {...getInputProps()} />
+            <BsUpload size={160} color={"white"} style={{marginBottom: "2rem"}}/>
+            {
+            isDragActive ?
+                <div className="upload-help-text">
+                    <h2>Drop the images here, or select one example image</h2>
+                </div> :
+                <div className="upload-help-text">
+                    <h2>Drag 'n' drop some image here, or click to select an example image</h2>
+                </div>
+            }
+        </div>
     )
 }
 

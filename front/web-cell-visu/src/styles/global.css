@@ -1,5 +1,6 @@
 :root{
     --color-dark: rgb(44,46,67);
+    --color-dark-hover:rgb(45, 47, 63);
     --color-dark-darker: rgb(37,38,49);
     --color-black: #242424;
     --color-green: #25ce4a;

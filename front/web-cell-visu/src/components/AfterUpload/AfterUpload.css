@@ -95,7 +95,7 @@
 }
 
 .cellImage {
-    max-width: 50vw;
+    max-width: 45vw;
     max-height: 75vh;
 }
 
@@ -121,6 +121,10 @@
     align-items: center;
     margin: 1rem;
 }
+
+.leftArrowIcon{
+    font-size: 4vmax;
+}
 @media screen and (max-width: 1000px) {
     .results-container{
         flex-direction: column;
@@ -140,7 +144,7 @@
         display: none;
     }
     .leftArrow{
-        top: 15rem;
+        top: 13rem;
     }
     .combobox{
         width: 55%;
@@ -148,6 +152,7 @@
         margin-right: 3rem;
         padding: 1rem;
         border: 6px solid white;
+        border-radius: 30px;
     }
     .gear-icon{
         display: none;
@@ -158,8 +163,25 @@
         justify-content: center;
         align-items: center;
         border: 6px solid white;
+        border-radius: 30px;
     }
     .download{
         margin-left: 3rem;
+    }
+    .leftArrowIcon{
+        font-size: 6vmax;
+    }
+    .results-card{
+        margin: 2rem;
+    }
+    .loading-container{
+        width: 90%;
+        height: 50%;
+    }
+    .loading-container h1{
+        font-size: 45px;
+    }
+    .loading-container {
+        font-size: 25px;
     }
 }

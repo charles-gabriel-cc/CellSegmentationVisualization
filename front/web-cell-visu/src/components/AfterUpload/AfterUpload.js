@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactImageMagnify from 'react-image-magnify'
+import Spinner from 'react-bootstrap/Spinner'
 
 import ZoomModal from '../../components/ZoomModal/ZoomModal.js'
 import ProgressBar from '../ProgressBar/ProgressBar'
@@ -60,7 +61,7 @@ const AfterUpload = (props) => {
     return(
         <div className="after-upload-container" style={{display: "flex", flexDirection: "row"}}>
             <button onClick={() => props.resetStates()} className="leftArrow">
-                <FiCornerUpLeft size={54} color={"white"} style={{backgroundColor: "transparent"}}/>
+                <FiCornerUpLeft className="leftArrowIcon" color={"white"} />
             </button>
             {!props.pollingState ?
                 <div className="loading-container">

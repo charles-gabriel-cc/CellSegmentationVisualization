@@ -14,14 +14,14 @@ const Navbar = () => {
         <div className="navbar">
             <img src={cellImg}></img>
             <div className="nav-title">
-                <h1>CellSeg</h1>
+                <h1>JCell</h1>
             </div>
             <div className="nav-icons">
                 <Link to='/help' className="nav-icon">
-                    <BsInfoCircle size={32} color={"white"} />
+                    <BsInfoCircle className="resizeIcons" color={"white"} />
                 </Link>
                 <a href="http://github.com/gustavogaldino/CellSegmentationVisualization"className="nav-icon">
-                    <FiGithub size={32} color={"white"} />
+                    <FiGithub className="resizeIcons" color={"white"} />
                 </a>
             </div>
         </div>
