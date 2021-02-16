@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 const Combobox = (props) => {
 	const useStyles = makeStyles((theme) => ({
 		root: {
-			fontSize: 18,
+			fontSize: 17,
 			font: 'initial',
 		},
 		formControl: {
@@ -57,7 +57,7 @@ const Combobox = (props) => {
 	
 	return (
 		<FormControl className={classes.formControl}>
-			<h3 className={classes.inputLabel}>Choose a mask:</h3>
+			<h3>Choose a mask:</h3>
 			<Select 
 				className={classes.select}
 				native

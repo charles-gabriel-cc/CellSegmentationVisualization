@@ -6,14 +6,13 @@
     background-color: var(--color-dark-darker);
 }
 
-.inner-modal-container h5{
+.inner-modal-container span{    
     color: white;
-    font-size: 1.4rem;
-    margin: 12px 0 8px 12px;
-    font-weight: 500;
+    font: 1rem Montserrat, sans-serif;
+    margin: 2rem;
+    font-weight: 600;
 }
 
-.custom-slider-container{
-    width: 60%;
-    margin-left: 12px;
+.switch {
+   margin-top: 1.5rem;
 }

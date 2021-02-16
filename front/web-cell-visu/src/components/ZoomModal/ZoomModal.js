@@ -1,45 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Slider } from '@material-ui/core'
+import Switch from "react-switch";
 
 import './ZoomModal.css'
 
 const ZoomModal = (props) => {
+    const [checked, setChecked] = useState(false)
 
-    const handleChange = (e, value) => {
-        props.updateZoomArea(value)
-    }
 
-    const handleOther = (e, value) => {
-        props.updateZoomRate(value)
+    const handleChecked = (newCheck) => {
+        setChecked(newCheck)
+        props.updateTakePaths()
     }
 
     return(
-        <Modal open={props.open} onClose={props.handleClose} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Modal open={props.open} onClose={props.handleClose} style={{display: "flex", justifyContent: "center", alignItems: "center", }}>
             <div className="inner-modal-container">
-                <h5>Zoom Area</h5>
-                <div className="custom-slider-container">
-                    <Slider
-                        min={20}
-                        defaultValue={45}
-                        value={props.zoomArea}
-                        step={1}
-                        max={70}
-                        color='primary'
-                        onChange={handleChange}
-                    />
-                </div>
-                <h5>Zoom Rate</h5>
-                <div className="custom-slider-container">
-                    <Slider
-                        min={500}
-                        defaultValue={640}
-                        value={props.zoomRate}
-                        step={1}
-                        max={2000}
-                        color='primary'
-                        onChange={handleOther}
-                    />
-                </div>
+                <span>Enable enumeration</span>
+                <Switch className="switch" onColor="#454759" onChange={handleChecked} checked={checked} disabled={!props.newPaths}/>
             </div>
         </Modal>
     )

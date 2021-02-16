@@ -9,9 +9,12 @@ import Carousel from 'react-elastic-carousel'
 import example1 from '../../assets/example-image-1.png'
 import example2 from '../../assets/example-image-2.png'
 
+import ExampleUp from '../../assets/example-image-5.svg'
+
 import { FiCornerUpLeft } from 'react-icons/fi'
 
 import AfterUpload from '../AfterUpload/AfterUpload'
+import { rgbToHex } from '@material-ui/core'
 
 const HomepageContainer = () => {
     const [imagePath, setImagePath] = useState('')
@@ -52,11 +55,9 @@ const HomepageContainer = () => {
 
     fetch(API_MODEL).then(res => res.json()).then(res => {
         if(!models){
-            updateModels(res['models'])
+            updateModels(res)
         }
     })
-
-    const allModels = models
 
     const selectModel = (model) => {
         updatePickModel(false)
@@ -104,7 +105,7 @@ const HomepageContainer = () => {
         updateImagePath(`../../assets/example-image-${sampleId}`)
         updateImageId(sampleId)
     }
-    console.log(model)
+
     return(
         !imagePath ? 
             !pickModel ?
@@ -120,7 +121,7 @@ const HomepageContainer = () => {
                         data-toggle="tooltip" 
                         title={"Model: " + model} 
                         onClick={() => updatePickModel(true)}
-                    >Pick a model<br/>{model}</button>
+                    >Pick a model:<br/>{model}</button>
                 </div>
                 <div className="info-container">
                     <div className="info-card" onClick={()=>{segmentSample(1)}}>
@@ -136,15 +137,19 @@ const HomepageContainer = () => {
                 <FiCornerUpLeft className="backIcon" color={"white"} onClick={() => updatePickModel(false)}/>
                 <h1>Click on the most similar to your image that will be segmented</h1>
                 <Carousel breakPoints={breakPoints}>
-                    {allModels.map((model, i) =>
-                        <img 
-                            key={i} 
-                            src={API_MODEL + model} 
-                            className="selection-image" 
-                            onClick={() => selectModel(model)}
-                            data-toggle="tooltip"
-                            title={model}
-                        />
+                    {Object.keys(models).map((model, i) =>
+                        <div className="container" key={i}> 
+                            <img 
+                                key={i} 
+                                src={API_MODEL + model} 
+                                onClick={() => selectModel(model)}
+                                data-toggle="tooltip"
+                                title={model}
+                            />  
+                            <div class="text-block">
+                                <p>{Object.values(models)[i]['description']}</p>
+                            </div>
+                        </div>
                     )}
                 </Carousel>
             </div>
@@ -158,5 +163,4 @@ const HomepageContainer = () => {
         />
     );
 }
-
 export default HomepageContainer;

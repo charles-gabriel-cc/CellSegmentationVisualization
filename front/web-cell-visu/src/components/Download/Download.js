@@ -1,28 +1,18 @@
 import React from 'react';
 import { BsDownload }from 'react-icons/bs'
 import './Download.css'
+import JSZip from 'jszip'
+import saveAs from 'jszip'
 
 const Download = (props) => {
 
-	const downloadEmployeeData = () => {
-		fetch(props.route)
-			.then(response => {
-				response.blob().then(blob => {
-					let url = window.URL.createObjectURL(blob);
-					let a = document.createElement('a');
-					a.href = url;
-					a.download = `${props.imageId}.png`;
-					a.click();
-				});
-		});
-	}
 	return (
-		<button onClick={downloadEmployeeData}>
+		<a href={props.zip} download>
 			<BsDownload
 				color={"white"} 
 				className="downloadIcon"
 			/>
-		</button>
+		</a>
 	)
 }
 export default Download;
