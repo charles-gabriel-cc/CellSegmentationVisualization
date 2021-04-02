@@ -1,0 +1,14 @@
+.path:hover{
+    stroke-width: 20;
+    stroke-opacity: 0.4;
+    fill: #25ff21;
+    fill-opacity: 0.4;
+    cursor: pointer;
+}
+.path:focus {
+    stroke-width: 20;
+    stroke-opacity: 0.4;
+    fill: #25ff21;
+    fill-opacity: 0.4;
+    cursor: pointer;
+}

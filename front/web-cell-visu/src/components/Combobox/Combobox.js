@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 
 const Combobox = (props) => {
@@ -22,6 +23,9 @@ const Combobox = (props) => {
 		},
 		inputLabel: {
 			color: 'white',
+		},
+		margin: {
+			color: 'white'
 		},
 		select: {
 			color: 'white',
@@ -54,10 +58,20 @@ const Combobox = (props) => {
 	const handleChange = (event) => {	
 		props.updateType(event.target.value);
 	};
+	/*
+			<TextField
+				id="first-name"
+				label="Cell numbers"
+				margin="normal"
+				className={classes.margin}
+				InputProps={{
+					className: classes.inputLabel
+				}}
+            />
+	*/
 	
 	return (
 		<FormControl className={classes.formControl}>
-			<h3>Choose a mask:</h3>
 			<Select 
 				className={classes.select}
 				native
@@ -72,12 +86,9 @@ const Combobox = (props) => {
 					},
 				}}
 			>   
-				<option className={classes.inputOption} value={'0'}></option>
-				<option className={classes.inputOption} value={'4'}>Boundary</option>
-				<option className={classes.inputOption} value={'5'}>Bound Overlay</option>	
-				<option className={classes.inputOption} value={'3'}>Instances RGB</option>
-				<option className={classes.inputOption} value={'1'}>Object Overlay</option>
-				<option className={classes.inputOption} value={'2'}>Segmentation</option>
+				<option className={classes.inputOption} value={0}></option>
+				<option className={classes.inputOption} value={5}>Bound Overlay</option>	
+				<option className={classes.inputOption} value={1}>Object Overlay</option>
 			</Select>
         </FormControl>
 	);

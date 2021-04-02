@@ -51,7 +51,7 @@ const UploadDropzone = (props) => {
                     <h2>Drop the images here, or select one example image</h2>
                 </div> :
                 <div className="upload-help-text">
-                    <h2>Drag 'n' drop some image here, or click to select an example image</h2>
+                    <h2>Drag 'n' drop some image here, or click to select one on the right</h2>
                 </div>
             }
         </div>

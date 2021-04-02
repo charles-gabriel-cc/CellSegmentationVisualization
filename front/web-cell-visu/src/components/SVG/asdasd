@@ -1,0 +1,41 @@
+    <svg id="svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
+        className="imageAbove" viewBox={"0 0 "+ props.sizes[0] + " " + props.sizes[1]}
+        preserveAspectRatio="xMidYMid meet">
+        <metadata>
+        Created by potrace 0.3, written by Peter Selinger 2001-2015
+        </metadata>
+        <g transform="scale(0.100000,0.100000)"
+            fill="#ffffff">
+        {props.borders ?
+        props.newPaths.map((paths, i) =>
+            <path
+                key={i}
+                id={i}
+                d={paths}
+                fill={colors[props.state][0] ? colors[props.state][0]: getRandomColor(i)}
+                stroke={colors[props.state][1]}
+                fillOpacity={colors[props.state][2]}
+                strokeWidth="10"
+            />)
+        :
+        undefined
+        }
+        {props.enumeration ?
+        props.newPaths.map((path, i) =>
+            <text 
+                dy="-50"
+                key={i}     
+                x={path.split(" ")[0].replace("M", "")}
+                font-size={430 - 12*(Math.min(Math.abs(props.newPaths.length - 10), 25))}
+                fontWeight="bold"
+                stroke="#000000"
+                opacity="0.8"
+                y={(parseInt(path.split(" ")[1]) < 430 - 12*(Math.min(props.newPaths.length, 25)))?430 - 12*(Math.min(props.newPaths.length, 25)):parseInt(path.split(" ")[1])} 
+                >
+                {i + 1}
+            </text>)
+        :
+        undefined    
+        }  
+        </g>
+    </svg>     

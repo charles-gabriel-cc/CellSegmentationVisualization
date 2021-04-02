@@ -20,7 +20,7 @@ const Navbar = () => {
                 <Link to='/help' className="nav-icon">
                     <BsInfoCircle className="resizeIcons" color={"white"} />
                 </Link>
-                <a href="http://github.com/gustavogaldino/CellSegmentationVisualization"className="nav-icon">
+                <a href="https://github.com/charles-gabriel-cc/CellSegmentationVisualization"className="nav-icon">
                     <FiGithub className="resizeIcons" color={"white"} />
                 </a>
             </div>

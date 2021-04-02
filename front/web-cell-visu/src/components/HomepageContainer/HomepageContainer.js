@@ -33,6 +33,10 @@ const HomepageContainer = () => {
 
     const [models, setModels] = useState(false)
 
+    const [ modelIndex, setModelIndex ] = useState(false);
+
+    const [ description, setDescription ] = useState('Generalist');
+
     const API_RESULT_ENDPOINT = "http://localhost:5000/result/"
 
     const API_MODEL= "http://localhost:5000/models/"
@@ -59,9 +63,10 @@ const HomepageContainer = () => {
         }
     })
 
-    const selectModel = (model) => {
+    const selectModel = (model, description) => {
         updatePickModel(false)
         updateModel(model)
+        setDescription(description);
     }
     
     const updateModel = (newModel) => {
@@ -121,7 +126,7 @@ const HomepageContainer = () => {
                         data-toggle="tooltip" 
                         title={"Model: " + model} 
                         onClick={() => updatePickModel(true)}
-                    >Pick a model:<br/>{model}</button>
+                    >Model: {model}</button>
                 </div>
                 <div className="info-container">
                     <div className="info-card" onClick={()=>{segmentSample(1)}}>
@@ -142,7 +147,7 @@ const HomepageContainer = () => {
                             <img 
                                 key={i} 
                                 src={API_MODEL + model} 
-                                onClick={() => selectModel(model)}
+                                onClick={() => selectModel(model, Object.values(models)[i]['description'])}
                                 data-toggle="tooltip"
                                 title={model}
                             />  
@@ -160,6 +165,8 @@ const HomepageContainer = () => {
             pollingState={pollingState}
             percentage={percentage}
             estimatedTime={estimatedTime}
+            model={model}
+            description={description}
         />
     );
 }

@@ -1,20 +1,43 @@
 import React, { useState } from 'react'
 import ReactImageMagnify from 'react-image-magnify'
-
+import * as d3 from 'd3'
 
 import ZoomModal from '../../components/ZoomModal/ZoomModal.js'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import Combobox from '../Combobox/Combobox.js'
 import Download from '../Download/Download.js'
+import SVG from '../SVG/SVG.js'
 
 import Button from 'react-bootstrap/Button'
+import Switch from "react-switch";
+import TextField from '@material-ui/core/TextField';
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 import { FiCornerUpLeft } from 'react-icons/fi'
 import { BsGear } from 'react-icons/bs'
+import { BsDownload, BsInfoSquare}from 'react-icons/bs'
+import { IoMdAlbums } from 'react-icons/io'
+import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineClear } from 'react-icons/ai'
+import {MdPhotoSizeSelectActual} from 'react-icons/md'
+import {MdZoomOutMap} from 'react-icons/md'
+
+import cellImg from '../../assets/black-white-cells.png'
+
+import {GiHamburgerMenu} from 'react-icons/gi'
+
+import { ProSidebar, 
+    Menu, 
+    MenuItem, 
+    SubMenu,   
+    SidebarHeader,
+    SidebarFooter,
+    SidebarContent,
+} from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
 
 import './AfterUpload.css'
+import './AfterUpload.scss'
 
 const AfterUpload = (props) => {
 
@@ -32,14 +55,16 @@ const AfterUpload = (props) => {
     const handleOpen = () => setOpen(true)
     const [zoomRate, setZoomRate ] = useState(640)
     const [ paths, setPaths ] = useState(false)
-    const [ state, setState ] = React.useState(1);
+    const [ state, setState ] = React.useState(0);
     const [ toggle, setToggle ] = useState(false)
     const [ sizes, setSizes ] = useState(false)
     const [ accept, setAccept ] = useState(false)
     const [newPaths, setNewPaths] = useState(false)
+    const [ enumeration, setEnumeration ] = useState(false)
+    const [ borders, setBorders ] = useState(true);
 
     
-    const route = API_IMAGE_ENDPOINT + props.imageId + '/' + state
+    const route = API_IMAGE_ENDPOINT + props.imageId + '/' + 0
 
     const updateZoomArea = (newValue) => {
         setZoomArea(newValue)
@@ -65,16 +90,12 @@ const AfterUpload = (props) => {
         setState(newValue)
     }
 
-    const takePaths = () => {
-        if(toggle) {
-            updateToggle(false)
-        } else {
-            updateToggle(true)
-        }
+    const updateEnumeration = () => {
+        setEnumeration(!enumeration)
     }
 
-    const updateTakePaths = () => {
-        takePaths()
+    const updateBorders = () => {
+        setBorders(!borders)
     }
 
     const img = new Image()
@@ -111,81 +132,202 @@ const AfterUpload = (props) => {
         fetch(JSON_ENDPOINT).then(res => res.json()).then(res => {
             updatePaths(Object.values(res))
         })
+        updateToggle(true);
     }
 
+    const colors = {
+        0:["transparent", "transparent", "1", "brightness(100%)"],
+        4:["#000000", "#ffffff", "1", "brightness(0%)"],    
+        5:["transparent", "#ff3300", "1", "brightness(50%)"],
+        3:[false, "transparent", "1", "brightness(0%)"],
+        1:[false, "#59de31", "0.3", "brightness(100%)"],
+        2:["#ffffff","transparent", "1", "brightness(0%)"],
+    }
+
+    function getCentroid(el){ 
+        var path = el
+        var cnt = 0;
+        var ans={x:0,y:0};
+        for(var i=0;i<path.length;i++){
+            if(path[i][0]=='M' || path[i][0]=='L'){
+                ans.x+=path[i][1];
+                ans.y+=path[i][2];
+                cnt++;
+            }
+        }
+        ans.x/=cnt;
+        ans.y/=cnt;
+        return ans;
+    }   
+
+    function handleKeyPress(e){
+        console.log(e)
+    }
+
+    const [checked, setChecked] = useState(false)
+    const handleChecked = (newCheck) => {
+        setChecked(newCheck)
+        updateEnumeration()
+    }
+
+    const [cellString, setCellString] = useState()
+    
+    const [toggleBack, setToggleBack ] = useState(true)
+
+    const [selected, setSelected] = useState([])
+
+    const [collapsed, setCollapsed ] = useState(true)
+
+    /*
+        <div className="controlPanel">
+            <div className="combobox">
+                <Combobox updateType={updateType} type={state}/>
+            </div> 
+            Model:<br/> {props.description}
+            <Download imageId={props.imageId}/>
+        </div>   
+    */
+
+       /* {!props.pollingState || !newPaths ?
+            <div className="loading-container">
+                <h1>Wait while your image is being processed...</h1>
+                <h2>Estimated Time: {props.estimatedTime}</h2>
+                <ProgressBar percentage={props.percentage} />
+            </div>
+        :
+            <div>                 
+                <div className="results-card" onWheel={handleZoom}>
+                    <TransformWrapper>
+                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                        <React.Fragment>
+                            <div className="tools">
+                                <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
+                                <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
+                                <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
+                                <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
+                                <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
+                            </div>
+                            <div className="imageBorders">
+                                <TransformComponent>
+                                    <img id="log" className="imageBehind" style={toggleBack?{filter: colors[state][3]}:{filter: "brightness(0%)"}} src={route}/>
+                                    <SVG
+                                        sizes={sizes}
+                                        newPaths={newPaths}
+                                        borders={borders}
+                                        colors={colors}
+                                        enumeration={enumeration}
+                                        state={state}
+                                        imageId={props.imageId}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                </TransformComponent>
+                            </div>
+                        </React.Fragment>
+                        )}
+                    </TransformWrapper>
+                </div>
+            </div>
+        } */
+
     return(
-        <div className="after-upload-container" style={{display: "flex", flexDirection: "row"}}>
-            <button onClick={() => props.resetStates()} className="leftArrow">
-                <FiCornerUpLeft className="leftArrowIcon" color={"white"} />
-            </button>
-            {!props.pollingState ?
+        <div>
+        {!props.pollingState || !newPaths ? undefined :
+        <div className="after-upload-container">
+            <ProSidebar collapsed={collapsed}>
+                <SidebarHeader>
+                    <div
+                        style={{
+                            padding: '24px',
+                            textTransform: 'uppercase',
+                            fontWeight: 'bold',
+                            fontSize: 14,
+                            letterSpacing: '1px',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        JCell
+                    </div>
+                </SidebarHeader>
+                
+                <SidebarContent>
+                    <Menu iconShape="square">
+                        <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
+                        <MenuItem icon={<FiCornerUpLeft />} onClick={() => props.resetStates()}></MenuItem>
+                    </Menu>
+                    <Menu iconShape="square">
+                        <SubMenu title="Masks" icon={<MdPhotoSizeSelectActual />}>
+                            <Combobox updateType={updateType} type={state}/>
+                        </SubMenu>
+                        <SubMenu title="Model" icon={<BsInfoSquare />}>
+                            {props.description}
+                        </SubMenu>
+                        <MenuItem icon={<BsDownload/>}>
+                            <Download imageId={props.imageId}/>
+                        </MenuItem>
+                    </Menu>
+                </SidebarContent>
+
+                <SidebarFooter  style={{ textAlign: 'center' }}>
+                    <div
+                    className="sidebar-btn-wrapper"
+                    style={{
+                        padding: '20px 24px',
+                    }}
+                    >
+                    <a
+                        href="https://github.com/azouaoui-med/react-pro-sidebar"
+                        target="_blank"
+                        className="sidebar-btn"
+                        rel="noopener noreferrer"
+                    >
+                        <span> View Source</span>
+                    </a>
+                    </div>
+                </SidebarFooter>
+            </ProSidebar>
+
+        </div>
+        }
+            {!props.pollingState || !newPaths ?
                 <div className="loading-container">
                     <h1>Wait while your image is being processed...</h1>
                     <h2>Estimated Time: {props.estimatedTime}</h2>
                     <ProgressBar percentage={props.percentage} />
                 </div>
-            :
-                <div className="results-container">
-                    <div className="controlPanel">
-                            <div className="combobox">
-                                <Combobox updateType={updateType} type={state}/>
+            :                
+                <div className="results-card" onWheel={handleZoom}>
+                    <TransformWrapper>
+                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                        <React.Fragment>
+                            <div className="tools">
+                                <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
+                                <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
+                                <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
+                                <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
+                                <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
                             </div>
-                            <div className="download">
-                                <Download route={route} imageId={props.imageId} zip={ZIP_ENDPOINT}/>
+                            <div className="imageBorders">
+                                <TransformComponent>
+                                    <img id="log" className="imageBehind" style={(toggleBack || state == 0)?{filter: colors[state][3]}:{filter: "brightness(0%)"}} src={route}/>
+                                    <SVG
+                                        sizes={sizes}
+                                        newPaths={newPaths}
+                                        borders={borders}
+                                        colors={colors}
+                                        enumeration={enumeration}
+                                        state={state}
+                                        imageId={props.imageId}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                </TransformComponent>
                             </div>
-                            <div className="gear-icon">
-                                <ZoomModal 
-                                    handleClose={handleClose} 
-                                    open={open} 
-                                    updateTakePaths={updateTakePaths}
-                                    toggle={toggle}
-                                    newPaths={newPaths}
-                                />
-                                <BsGear size={48} color="white" onClick={handleOpen} style={{cursor: "pointer"}}/>
-                        </div>  
-                    </div>                    
-                    <div className="results-card" onWheel={handleZoom}>
-                        <TransformWrapper>
-                            <TransformComponent>
-                                <img className="imageBehind" src={route}/>
-                                {toggle ?
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                    className="imageAbove" viewBox={"0 0 "+ sizes[0] + " " + sizes[1]}
-                                    preserveAspectRatio="xMidYMid meet">
-                                    <metadata>
-                                    Created by potrace 0.3, written by Peter Selinger 2001-2015
-                                    </metadata>
-                                    <g transform="scale(0.100000,0.100000)"
-                                        fill="#ff0022">
-                                    {newPaths.map((paths, i) =>
-                                        <path
-                                            key={i}
-                                            id={i}
-                                            d={paths}
-                                            fill={"transparent"}
-                                            stroke="#59de31" 
-                                            strokeWidth="40"
-                                        />
-                                    )}
-                                    {newPaths.map((path, i) =>
-                                        <text 
-                                            key={i}     
-                                            x={path.split(" ")[0].replace("M", "")} 
-                                            font-size={400 - 11*(Math.min(paths.length, 25))}
-                                            fontWeight="bold"
-                                            y={(parseInt(path.split(" ")[1]) < 400 - 11*(Math.min(paths.length, 25)))?400 - 11*(Math.min(paths.length, 25)):parseInt(path.split(" ")[1])} 
-                                            >
-                                            {i + 1}
-                                        </text> 
-                                    )}  
-                                    </g>
-                                </svg>                                    
-                                :
-                                undefined
-                                }
-                            </TransformComponent>
-                        </TransformWrapper>
-                    </div>
+                        </React.Fragment>
+                        )}
+                    </TransformWrapper>
                 </div>
             }
         </div>

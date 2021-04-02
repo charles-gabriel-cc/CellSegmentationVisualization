@@ -1,9 +1,27 @@
-.downloadIcon{
-    font-size: 54px;
+.download{
+  border: none;
+  color: white;
+  padding: 8px 28px;
+  cursor: pointer;
+  background-color: var(--color-dark-darker);
+  border-radius: 5px;
+  border: 2px solid white;
+  font-size: 15px;  
+  margin-top: 1rem;
+}
+.download:hover {
+  background-color: var(--color-dark-hover);
+}
+
+.downloadIcon {
+  font-size: 1rem;
+  position: relative;
+  top: 5px;
+  margin-left: 1rem;
 }
 
 @media only screen and (max-width: 1000px) {
-    .downloadIcon {
-      font-size: 10vmax;
-    }
+  .downloadIcon{
+    font-size: 4rem;
   }
+}
