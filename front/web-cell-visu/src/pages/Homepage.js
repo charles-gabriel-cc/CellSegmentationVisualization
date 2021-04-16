@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar/Navbar';
 
 import HomepageContainer from '../components/HomepageContainer/HomepageContainer'
 
 const Homepage = () => {
+    const [ menu, setMenu ] = useState(false)
+
     return(
         <>
+            {!menu?
             <Navbar/>
-            <HomepageContainer />
+            :
+            undefined
+            }   
+            <HomepageContainer 
+                setMenu={setMenu}
+            />
         </>
     );
 }

@@ -10,6 +10,7 @@ const UploadDropzone = (props) => {
 
     const uploadData = (file) => {
         const formData = new FormData()
+        console.log(file)
         formData.append('image', file)
         formData.append('model', props.model)
         formData.append('gpu', false)
@@ -29,6 +30,7 @@ const UploadDropzone = (props) => {
     const onDrop = useCallback(acceptedFiles => {
         const fileType = acceptedFiles[0].type;
         const file = acceptedFiles[0];
+
         if(fileType.substring(0,5) != "image"){
             alert('Please select an image file.')
         }

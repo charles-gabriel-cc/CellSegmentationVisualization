@@ -1,97 +1,37 @@
 import React, { useState } from 'react'	
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import FormLabel from '@material-ui/core/FormLabel';
+import { withStyles } from '@material-ui/core/styles';
+import { indigo } from '@material-ui/core/colors';
 
 
 const Combobox = (props) => {
-	const useStyles = makeStyles((theme) => ({
+
+	const WhiteRadio = withStyles({
 		root: {
-			fontSize: 17,
-			font: 'initial',
+		  color: "#ffffff",
+		  '&$checked': {
+			color: indigo[600],
+		  },
 		},
-		formControl: {
-			margin: theme.spacing(1),
-			minWidth: 120,
-			color: 'white'
-		},
-		inputOption: {
-			color: 'black',
-			fontSize: 18
-		},
-		inputLabel: {
-			color: 'white',
-		},
-		margin: {
-			color: 'white'
-		},
-		select: {
-			color: 'white',
-			'&:before': {
-				borderColor: 'white',
-			},
-			'&:after': {
-				borderColor: 'white',
-			}
-		},
-		icon: {
-			fill: 'white',
-		},
-		'@media (max-width: 1000px)' : {
-			root: {
-				fontSize: 50,
-				
-			},
-			inputLabel: {
-				fontSize: 50
-			},
-			icon: {
-				fontSize: 35
-			},
-		}
-	}))
-
-	const classes = useStyles();
-
-	const handleChange = (event) => {	
-		props.updateType(event.target.value);
-	};
-	/*
-			<TextField
-				id="first-name"
-				label="Cell numbers"
-				margin="normal"
-				className={classes.margin}
-				InputProps={{
-					className: classes.inputLabel
-				}}
-            />
-	*/
+		checked: {},
+	  })((props) => <Radio color="default" {...props} />);
 	
-	return (
-		<FormControl className={classes.formControl}>
-			<Select 
-				className={classes.select}
-				native
-				value={props.type}
-				onChange={handleChange}
-				inputProps = {{
-					name: 'type',
-					id: 'segmentation-type',
-					classes: {
-						icon: classes.icon,
-						root: classes.root,
-					},
-				}}
-			>   
-				<option className={classes.inputOption} value={0}></option>
-				<option className={classes.inputOption} value={5}>Bound Overlay</option>	
-				<option className={classes.inputOption} value={1}>Object Overlay</option>
-			</Select>
-        </FormControl>
-	);
+	return(
+	<FormControl component="fieldset">
+		<FormLabel component="legend"></FormLabel>
+		<RadioGroup aria-label="gender" name="gender1" value={props.state} onChange={props.handleState}>
+			<FormControlLabel value="0" control={<WhiteRadio />} label="None" />
+			<FormControlLabel value="5" control={<WhiteRadio />} label="Bound Overlay" />
+			<FormControlLabel value="1" control={<WhiteRadio />} label="Object Overlay" />
+		</RadioGroup>
+	</FormControl>
+	)
 }
 
 export default Combobox;

@@ -22,6 +22,8 @@
     display: inline;
     font: 42px Montserrat, sans-serif;
     color: white;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .navbar a{

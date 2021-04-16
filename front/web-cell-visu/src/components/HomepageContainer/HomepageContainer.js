@@ -16,7 +16,7 @@ import { FiCornerUpLeft } from 'react-icons/fi'
 import AfterUpload from '../AfterUpload/AfterUpload'
 import { rgbToHex } from '@material-ui/core'
 
-const HomepageContainer = () => {
+const HomepageContainer = (props) => {
     const [imagePath, setImagePath] = useState('')
 
     const [imageId, setImageId] = useState('')
@@ -81,6 +81,7 @@ const HomepageContainer = () => {
         setImageId('')
         setPollingState(false)
         setPickModel(false)
+        props.setMenu(false)
     }
 
     const breakPoints = [
@@ -107,7 +108,7 @@ const HomepageContainer = () => {
     }
 
     const segmentSample = (sampleId) => {
-        updateImagePath(`../../assets/example-image-${sampleId}`)
+        updateImagePath(`example-image-${sampleId}`)
         updateImageId(sampleId)
     }
 
@@ -130,10 +131,10 @@ const HomepageContainer = () => {
                 </div>
                 <div className="info-container">
                     <div className="info-card" onClick={()=>{segmentSample(1)}}>
-                        <img src={example1} />
+                        <img id="example1"src={example1} />
                     </div>
                     <div className="info-card" onClick={()=>{segmentSample(2)}}>
-                        <img src={example2} />
+                        <img id="example2" src={example2} />
                     </div>
                 </div>
             </div>
@@ -167,6 +168,7 @@ const HomepageContainer = () => {
             estimatedTime={estimatedTime}
             model={model}
             description={description}
+            setMenu={props.setMenu}
         />
     );
 }

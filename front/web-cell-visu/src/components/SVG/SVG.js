@@ -3,6 +3,7 @@ import { Tooltip } from "react-svg-tooltip";
 
 import './SVG.css'
 import * as d3 from 'd3'
+import ExamplePaths from '../../assets/ExamplePaths.js'
 
 
 const SVG = (props) => {
@@ -10,12 +11,22 @@ const SVG = (props) => {
     const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
 
     const SVG_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
+
+    const [ arrPaths, setArrPaths ] = useState(props.newPaths)
+
+    const [choosePath, setChoosePath] = useState(false)
     
     const circleRef = createRef()
 
-    const arrLength = props.newPaths.length;
-
     const refs = useRef([])
+
+    if((props.imageId == 1 || props.imageId == 2) && !choosePath) {
+        setArrPaths(ExamplePaths(props.imageId - 1))
+        setChoosePath(true)
+    }
+    console.log(arrPaths)
+
+    const arrLength = arrPaths.length;
 
     const [count, setCount] = useState(1)
 
@@ -53,7 +64,7 @@ const SVG = (props) => {
         </metadata>
         <g id="component" transform="scale(0.100000,0.100000)"
             fill="#ffffff">
-        {props.newPaths.map((paths, i) =>
+        {arrPaths.map((paths, i) =>
             <g>
                 <path
                     className="path"
@@ -69,26 +80,27 @@ const SVG = (props) => {
                 />
                 <Tooltip triggerRef={refs.current[i]}>
                     <polygon 
-                        points="-5,-10 5,-10 0,0"
+                        points={(-5/props.scale) + "," + (-10/props.scale) + " "
+                                + (5/props.scale) + "," + (-10/props.scale) + " 0,0"}
                         fill="#252631"
                         opacity="0.8"
                         rx={10}
                         ry={10}
                     />
                     <rect
-                        x={-30}
-                        y={-45}
-                        width={60}
-                        height={35}
-                        rx={10}
-                        ry={10}
+                        x={-30/props.scale}
+                        y={-45/props.scale}
+                        width={60/props.scale}
+                        height={35/props.scale}
+                        rx={10/props.scale}
+                        ry={10/props.scale}
                         fill="#252631"
                         opacity="0.8"
                     />
                     <text 
-                        x={(i < 10) ? -6 : (i < 100) ? -12: -18} 
-                        y={-20} 
-                        fontSize={25} 
+                        x={(i < 10) ? -6/props.scale : (i < 100) ? -12/props.scale: -18/props.scale} 
+                        y={-20/props.scale} 
+                        fontSize={25/props.scale} 
                         fill="white"
                     >
                         {i}
@@ -100,29 +112,29 @@ const SVG = (props) => {
         {props.selected.map((index, i) =>
             <g>
                 <polygon 
-                    points={(parseInt(props.newPaths[index].split(" ")[0].replace("M", "")) - 60)+","+(parseInt(props.newPaths[index].split(" ")[1]) - 120)+" "+
-                    (parseInt(props.newPaths[index].split(" ")[0].replace("M", "")) + 60) +","+(parseInt(props.newPaths[index].split(" ")[1]) - 120)+" "+
-                    (parseInt(props.newPaths[index].split(" ")[0].replace("M", "")))+","+(parseInt(props.newPaths[index].split(" ")[1]) - 40)
+                    points={(parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 60/props.scale)+","+(parseInt(arrPaths[index].split(" ")[1]) - 120/props.scale)+" "+
+                    (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) + 60/props.scale) +","+(parseInt(arrPaths[index].split(" ")[1]) - 120/props.scale)+" "+
+                    (parseInt(arrPaths[index].split(" ")[0].replace("M", "")))+","+(parseInt(arrPaths[index].split(" ")[1]) - 40/props.scale)
                     }
                     fill="#252631"
                     opacity="0.8"
-                    rx={10}
-                    ry={10}
+                    rx={10/props.scale}
+                    ry={10/props.scale}
                 />
                 <rect
-                    x={props.newPaths[index].split(" ")[0].replace("M", "")-230}
-                    y={parseInt(props.newPaths[index].split(" ")[1]) - 400}
-                    width={480}
-                    height={280}
-                    rx={100}
-                    ry={100}
+                    x={(arrPaths[index].split(" ")[0].replace("M", "")-230/props.scale)}
+                    y={(parseInt(arrPaths[index].split(" ")[1]) - 400/props.scale)}
+                    width={480/props.scale}
+                    height={280/props.scale}
+                    rx={100/props.scale}
+                    ry={100/props.scale}
                     fill="#252631"
                     opacity="0.8"
                 />
                 <text 
-                    x={(index < 10) ? parseInt(props.newPaths[index].split(" ")[0].replace("M", "")) - 30: (index < 100) ? parseInt(props.newPaths[index].split(" ")[0].replace("M", "")) - 90 : parseInt(props.newPaths[index].split(" ")[0].replace("M", "")) - 130} 
-                    y={parseInt(props.newPaths[index].split(" ")[1]) - 200} 
-                    fontSize={200} 
+                    x={(index < 10) ? (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 30/props.scale): (index < 100) ? (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 90/props.scale) : (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 130/props.scale)} 
+                    y={(parseInt(arrPaths[index].split(" ")[1]) - 200/props.scale)} 
+                    fontSize={200/props.scale} 
                     fill="white"
                 >
                     {index}

@@ -21,6 +21,8 @@ import { IoMdAlbums } from 'react-icons/io'
 import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineClear } from 'react-icons/ai'
 import {MdPhotoSizeSelectActual} from 'react-icons/md'
 import {MdZoomOutMap} from 'react-icons/md'
+import { FiGithub } from 'react-icons/fi'
+import { BsInfoCircle } from 'react-icons/bs'
 
 import cellImg from '../../assets/black-white-cells.png'
 
@@ -38,6 +40,13 @@ import 'react-pro-sidebar/dist/css/styles.css';
 
 import './AfterUpload.css'
 import './AfterUpload.scss'
+import { Icon } from '@material-ui/core'
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const AfterUpload = (props) => {
 
@@ -65,7 +74,7 @@ const AfterUpload = (props) => {
 
     
     const route = API_IMAGE_ENDPOINT + props.imageId + '/' + 0
-
+    
     const updateZoomArea = (newValue) => {
         setZoomArea(newValue)
     }
@@ -125,6 +134,7 @@ const AfterUpload = (props) => {
     )} */
     if(accept && paths && !newPaths) {
         setNewPaths(paths)
+        props.setMenu(true)
     }
 
     if(!paths && props.pollingState && !accept) {
@@ -230,6 +240,10 @@ const AfterUpload = (props) => {
             </div>
         } */
 
+    const handleState = (event) => {
+        setState(event.target.value)
+    }
+
     return(
         <div>
         {!props.pollingState || !newPaths ? undefined :
@@ -240,26 +254,31 @@ const AfterUpload = (props) => {
                         style={{
                             padding: '24px',
                             textTransform: 'uppercase',
+                            font: '42px Montserrat, sans-serif',
                             fontWeight: 'bold',
-                            fontSize: 14,
+                            fontSize: 36,
                             letterSpacing: '1px',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
                         }}
-                    >
+                    >  
+                        <img className="iconCells" src={cellImg}></img>
                         JCell
                     </div>
                 </SidebarHeader>
                 
                 <SidebarContent>
-                    <Menu iconShape="square">
+                    <Menu iconShape="round">
                         <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
                         <MenuItem icon={<FiCornerUpLeft />} onClick={() => props.resetStates()}></MenuItem>
                     </Menu>
-                    <Menu iconShape="square">
+                    <Menu iconShape="round">
                         <SubMenu title="Masks" icon={<MdPhotoSizeSelectActual />}>
-                            <Combobox updateType={updateType} type={state}/>
+                            <Combobox 
+                                state={state}
+                                handleState={handleState}
+                            />
                         </SubMenu>
                         <SubMenu title="Model" icon={<BsInfoSquare />}>
                             {props.description}
@@ -271,21 +290,21 @@ const AfterUpload = (props) => {
                 </SidebarContent>
 
                 <SidebarFooter  style={{ textAlign: 'center' }}>
-                    <div
+                <div
                     className="sidebar-btn-wrapper"
                     style={{
                         padding: '20px 24px',
                     }}
                     >
                     <a
-                        href="https://github.com/azouaoui-med/react-pro-sidebar"
+                        href="https://github.com/charles-gabriel-cc/CellSegmentationVisualization"
                         target="_blank"
                         className="sidebar-btn"
                         rel="noopener noreferrer"
                     >
-                        <span> View Source</span>
+                    <FiGithub />
                     </a>
-                    </div>
+                </div>
                 </SidebarFooter>
             </ProSidebar>
 
@@ -297,18 +316,12 @@ const AfterUpload = (props) => {
                     <h2>Estimated Time: {props.estimatedTime}</h2>
                     <ProgressBar percentage={props.percentage} />
                 </div>
-            :                
+            :      
+                <div className="results-container">
                 <div className="results-card" onWheel={handleZoom}>
                     <TransformWrapper>
-                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                        {({scale, zoomIn, zoomOut, resetTransform, ...rest }) => (
                         <React.Fragment>
-                            <div className="tools">
-                                <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
-                                <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
-                                <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
-                                <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
-                                <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
-                            </div>
                             <div className="imageBorders">
                                 <TransformComponent>
                                     <img id="log" className="imageBehind" style={(toggleBack || state == 0)?{filter: colors[state][3]}:{filter: "brightness(0%)"}} src={route}/>
@@ -322,12 +335,21 @@ const AfterUpload = (props) => {
                                         imageId={props.imageId}
                                         selected={selected}
                                         setSelected={setSelected}
+                                        scale={scale}
                                     />
                                 </TransformComponent>
+                            </div>
+                            <div className="tools">
+                                <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
+                                <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
+                                <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
+                                <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
+                                <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
                             </div>
                         </React.Fragment>
                         )}
                     </TransformWrapper>
+                </div>
                 </div>
             }
         </div>
