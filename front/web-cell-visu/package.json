@@ -21,6 +21,7 @@
     "react-pro-sidebar": "^0.6.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-svg-tooltip": "^0.0.11",
     "react-switch": "^6.0.0",
     "react-tooltip": "^4.2.15",
     "react-zoom-pan-pinch": "^1.6.1",

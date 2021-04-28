@@ -1,6 +1,6 @@
-import React, {useCallback} from 'react'
+import React, { useCallback } from 'react'
 
-import {useDropzone} from 'react-dropzone'
+import { useDropzone } from 'react-dropzone'
 
 import { BsUpload } from 'react-icons/bs'
 
@@ -20,7 +20,7 @@ const UploadDropzone = (props) => {
             body: formData,
         }
 
-        const API_ENDPOINT = "http://localhost:5000/segmentation/"
+        const API_ENDPOINT = "http://www.jcell.org:3984/segmentation/"
 
         fetch(API_ENDPOINT, options).then(res => res.json()).then(res => {
             props.updateImageId(res['id'])
@@ -31,30 +31,30 @@ const UploadDropzone = (props) => {
         const fileType = acceptedFiles[0].type;
         const file = acceptedFiles[0];
 
-        if(fileType.substring(0,5) != "image"){
+        if (fileType.substring(0, 5) != "image") {
             alert('Please select an image file.')
         }
-        else{
+        else {
             props.updateImagePath(acceptedFiles[0].path)
             uploadData(file)
         }
     }, [])
 
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return (
-        <div {...getRootProps()} className="upload-container" data-toggle="tooltip" title={"Try to choose a model before upload"}> 
+        <div {...getRootProps()} className="upload-container" data-toggle="tooltip" title={"Try to choose a model before upload"}>
             <input {...getInputProps()} />
-            <BsUpload size={160} color={"white"} style={{marginBottom: "2rem"}}/>
+            <BsUpload size={160} color={"white"} style={{ marginBottom: "2rem" }} />
             {
-            isDragActive ?
-                <div className="upload-help-text">
-                    <h2>Drop the images here, or select one example image</h2>
-                </div> :
-                <div className="upload-help-text">
-                    <h2>Drag 'n' drop some image here, or click to select one on the right</h2>
-                </div>
+                isDragActive ?
+                    <div className="upload-help-text">
+                        <h2>Drop the images here, or select one example image</h2>
+                    </div> :
+                    <div className="upload-help-text">
+                        <h2>Drag 'n' drop some image here, or click to select one on the right</h2>
+                    </div>
             }
         </div>
     )

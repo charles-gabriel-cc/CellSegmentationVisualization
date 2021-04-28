@@ -27,19 +27,19 @@ const HomepageContainer = (props) => {
 
     const [estimatedTime, setEstimatedTime] = useState('?')
 
-    const  [pickModel, setPickModel] = useState(false)
+    const [pickModel, setPickModel] = useState(false)
 
     const [model, setModel] = useState('general')
 
     const [models, setModels] = useState(false)
 
-    const [ modelIndex, setModelIndex ] = useState(false);
+    const [modelIndex, setModelIndex] = useState(false);
 
-    const [ description, setDescription ] = useState('Generalist');
+    const [description, setDescription] = useState('Generalist');
 
-    const API_RESULT_ENDPOINT = "http://localhost:5000/result/"
+    const API_RESULT_ENDPOINT = "http://www.jcell.org:3984/result/"
 
-    const API_MODEL= "http://localhost:5000/models/"
+    const API_MODEL = "http://www.jcell.org:3984/models/"
 
     const updateImageId = (newId) => {
         setImageId(newId)
@@ -58,7 +58,7 @@ const HomepageContainer = (props) => {
     }
 
     fetch(API_MODEL).then(res => res.json()).then(res => {
-        if(!models){
+        if (!models) {
             updateModels(res)
         }
     })
@@ -68,7 +68,7 @@ const HomepageContainer = (props) => {
         updateModel(model)
         setDescription(description);
     }
-    
+
     const updateModel = (newModel) => {
         setModel(newModel)
     }
@@ -86,24 +86,24 @@ const HomepageContainer = (props) => {
 
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
-        { width: 1000, itemsToShow: 2},
+        { width: 1000, itemsToShow: 2 },
     ];
 
     const checkPollingState = () => {
         fetch(API_RESULT_ENDPOINT + imageId).then(res => res.json()).then(res => {
-             if(res['message'] == 'Process still running'){
-                 const percentageValue = parseInt(res['Percentage'].slice(0,-1))
-                 updateEstimatedTime(res['ETA'])
-                 updatePercentage(percentageValue)
-                 setTimeout(checkPollingState, 2000)
-             }
-             else{
-                 setPollingState(true)
-             }
-         })
+            if (res['message'] == 'Process still running') {
+                const percentageValue = parseInt(res['Percentage'].slice(0, -1))
+                updateEstimatedTime(res['ETA'])
+                updatePercentage(percentageValue)
+                setTimeout(checkPollingState, 2000)
+            }
+            else {
+                setPollingState(true)
+            }
+        })
     }
 
-    if(!pollingState && imageId){
+    if (!pollingState && imageId) {
         checkPollingState()
     }
 
@@ -112,64 +112,64 @@ const HomepageContainer = (props) => {
         updateImageId(sampleId)
     }
 
-    return(
-        !imagePath ? 
+    return (
+        !imagePath ?
             !pickModel ?
-            <div className="homepage-container">
-                <div className="upload-container-model">
-                    <UploadDropzone
-                        updateImagePath={updateImagePath}   
-                        updateImageId={updateImageId}
-                        updatePickModel={updatePickModel}
-                        model={model}
-                    />
-                    <button 
-                        data-toggle="tooltip" 
-                        title={"Model: " + model} 
-                        onClick={() => updatePickModel(true)}
-                    >Model: {model}</button>
-                </div>
-                <div className="info-container">
-                    <div className="info-card" onClick={()=>{segmentSample(1)}}>
-                        <img id="example1"src={example1} />
+                <div className="homepage-container">
+                    <div className="upload-container-model">
+                        <UploadDropzone
+                            updateImagePath={updateImagePath}
+                            updateImageId={updateImageId}
+                            updatePickModel={updatePickModel}
+                            model={model}
+                        />
+                        <button
+                            data-toggle="tooltip"
+                            title={"Model: " + model}
+                            onClick={() => updatePickModel(true)}
+                        >Model: {model}</button>
                     </div>
-                    <div className="info-card" onClick={()=>{segmentSample(2)}}>
-                        <img id="example2" src={example2} />
-                    </div>
-                </div>
-            </div>
-            :
-            <div className="carousel-models">
-                <FiCornerUpLeft className="backIcon" color={"white"} onClick={() => updatePickModel(false)}/>
-                <h1>Click on the most similar to your image that will be segmented</h1>
-                <Carousel breakPoints={breakPoints}>
-                    {Object.keys(models).map((model, i) =>
-                        <div className="container" key={i}> 
-                            <img 
-                                key={i} 
-                                src={API_MODEL + model} 
-                                onClick={() => selectModel(model, Object.values(models)[i]['description'])}
-                                data-toggle="tooltip"
-                                title={model}
-                            />  
-                            <div class="text-block">
-                                <p>{Object.values(models)[i]['description']}</p>
-                            </div>
+                    <div className="info-container">
+                        <div className="info-card" onClick={() => { segmentSample(1) }}>
+                            <img id="example1" src={example1} />
                         </div>
-                    )}
-                </Carousel>
-            </div>
-        :
-        <AfterUpload
-            imageId={imageId}
-            resetStates={resetStates}
-            pollingState={pollingState}
-            percentage={percentage}
-            estimatedTime={estimatedTime}
-            model={model}
-            description={description}
-            setMenu={props.setMenu}
-        />
+                        <div className="info-card" onClick={() => { segmentSample(2) }}>
+                            <img id="example2" src={example2} />
+                        </div>
+                    </div>
+                </div>
+                :
+                <div className="carousel-models">
+                    <FiCornerUpLeft className="backIcon" color={"white"} onClick={() => updatePickModel(false)} />
+                    <h1>Click on the most similar to your image that will be segmented</h1>
+                    <Carousel breakPoints={breakPoints}>
+                        {Object.keys(models).map((model, i) =>
+                            <div className="container" key={i}>
+                                <img
+                                    key={i}
+                                    src={API_MODEL + model}
+                                    onClick={() => selectModel(model, Object.values(models)[i]['description'])}
+                                    data-toggle="tooltip"
+                                    title={model}
+                                />
+                                <div class="text-block">
+                                    <p>{Object.values(models)[i]['description']}</p>
+                                </div>
+                            </div>
+                        )}
+                    </Carousel>
+                </div>
+            :
+            <AfterUpload
+                imageId={imageId}
+                resetStates={resetStates}
+                pollingState={pollingState}
+                percentage={percentage}
+                estimatedTime={estimatedTime}
+                model={model}
+                description={description}
+                setMenu={props.setMenu}
+            />
     );
 }
 export default HomepageContainer;
