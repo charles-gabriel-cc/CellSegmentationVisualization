@@ -8,7 +8,7 @@ import ExamplePaths from '../../assets/ExamplePaths.js'
 
 const SVG = (props) => {
 
-    const API_IMAGE_ENDPOINT = "http://www.jcell.org:3984/result/image/"
+    const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
 
     const SVG_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
 

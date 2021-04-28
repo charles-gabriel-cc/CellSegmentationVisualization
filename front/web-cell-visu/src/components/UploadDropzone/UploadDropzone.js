@@ -20,7 +20,7 @@ const UploadDropzone = (props) => {
             body: formData,
         }
 
-        const API_ENDPOINT = "http://www.jcell.org:3984/segmentation/"
+        const API_ENDPOINT = "https://www.jcell.org:3984/segmentation/"
 
         fetch(API_ENDPOINT, options).then(res => res.json()).then(res => {
             props.updateImageId(res['id'])

@@ -37,9 +37,9 @@ const HomepageContainer = (props) => {
 
     const [description, setDescription] = useState('Generalist');
 
-    const API_RESULT_ENDPOINT = "http://www.jcell.org:3984/result/"
+    const API_RESULT_ENDPOINT = "https://www.jcell.org:3984/result/"
 
-    const API_MODEL = "http://www.jcell.org:3984/models/"
+    const API_MODEL = "https://www.jcell.org:3984/models/"
 
     const updateImageId = (newId) => {
         setImageId(newId)

@@ -51,7 +51,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 const AfterUpload = (props) => {
 
-    const API_IMAGE_ENDPOINT = "http://www.jcell.org:3984/result/image/"
+    const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
 
     const url = API_IMAGE_ENDPOINT + props.imageId + '/'
 
