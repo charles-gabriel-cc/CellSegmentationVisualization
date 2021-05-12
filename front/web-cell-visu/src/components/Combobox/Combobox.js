@@ -25,10 +25,10 @@ const Combobox = (props) => {
 	return(
 	<FormControl component="fieldset">
 		<FormLabel component="legend"></FormLabel>
-		<RadioGroup aria-label="gender" name="gender1" value={props.state} onChange={props.handleState}>
-			<FormControlLabel value="0" control={<WhiteRadio />} label="None" />
-			<FormControlLabel value="5" control={<WhiteRadio />} label="Bound Overlay" />
-			<FormControlLabel value="1" control={<WhiteRadio />} label="Object Overlay" />
+		<RadioGroup value={props.state} onChange={props.handleState}>
+			<FormControlLabel value="0" control={<WhiteRadio size="small"/>} label="None" />
+			<FormControlLabel value="5" control={<WhiteRadio size="small"/>} label="Bound Overlay" />
+			<FormControlLabel value="1" control={<WhiteRadio size="small" checked={props.state === '1'}/>} label="Object Overlay" />
 		</RadioGroup>
 	</FormControl>
 	)

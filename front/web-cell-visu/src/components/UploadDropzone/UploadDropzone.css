@@ -27,8 +27,11 @@
 .upload-container:hover{
     cursor: pointer;
 }
+.upload-help-text h2{
+    font-size: 1rem;
+}
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) and (orientation: portrait) {
     .upload-help-text h2{
         font-size: 50px;
     }

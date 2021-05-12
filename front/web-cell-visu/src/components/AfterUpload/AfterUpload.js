@@ -23,6 +23,7 @@ import {MdPhotoSizeSelectActual} from 'react-icons/md'
 import {MdZoomOutMap} from 'react-icons/md'
 import { FiGithub } from 'react-icons/fi'
 import { BsInfoCircle } from 'react-icons/bs'
+import {AiFillTags} from 'react-icons/ai'
 
 import cellImg from '../../assets/black-white-cells.png'
 
@@ -64,7 +65,7 @@ const AfterUpload = (props) => {
     const handleOpen = () => setOpen(true)
     const [zoomRate, setZoomRate ] = useState(640)
     const [ paths, setPaths ] = useState(false)
-    const [ state, setState ] = React.useState(0);
+    const [ state, setState ] = React.useState('1');
     const [ toggle, setToggle ] = useState(false)
     const [ sizes, setSizes ] = useState(false)
     const [ accept, setAccept ] = useState(false)
@@ -124,14 +125,7 @@ const AfterUpload = (props) => {
             setZoomRate(zoomRate - 80)
         }
     }
-    /*{paths.map((paths, i) =>
-        <path
-            key={i}
-            id={i}
-            d={paths}
-            fill={"transparent"}
-        />
-    )} */
+
     if(accept && paths && !newPaths) {
         setNewPaths(paths)
         props.setMenu(true)
@@ -188,60 +182,18 @@ const AfterUpload = (props) => {
 
     const [collapsed, setCollapsed ] = useState(true)
 
-    /*
-        <div className="controlPanel">
-            <div className="combobox">
-                <Combobox updateType={updateType} type={state}/>
-            </div> 
-            Model:<br/> {props.description}
-            <Download imageId={props.imageId}/>
-        </div>   
-    */
-
-       /* {!props.pollingState || !newPaths ?
-            <div className="loading-container">
-                <h1>Wait while your image is being processed...</h1>
-                <h2>Estimated Time: {props.estimatedTime}</h2>
-                <ProgressBar percentage={props.percentage} />
-            </div>
-        :
-            <div>                 
-                <div className="results-card" onWheel={handleZoom}>
-                    <TransformWrapper>
-                        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                        <React.Fragment>
-                            <div className="tools">
-                                <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
-                                <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
-                                <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
-                                <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
-                                <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
-                            </div>
-                            <div className="imageBorders">
-                                <TransformComponent>
-                                    <img id="log" className="imageBehind" style={toggleBack?{filter: colors[state][3]}:{filter: "brightness(0%)"}} src={route}/>
-                                    <SVG
-                                        sizes={sizes}
-                                        newPaths={newPaths}
-                                        borders={borders}
-                                        colors={colors}
-                                        enumeration={enumeration}
-                                        state={state}
-                                        imageId={props.imageId}
-                                        selected={selected}
-                                        setSelected={setSelected}
-                                    />
-                                </TransformComponent>
-                            </div>
-                        </React.Fragment>
-                        )}
-                    </TransformWrapper>
-                </div>
-            </div>
-        } */
-
     const handleState = (event) => {
         setState(event.target.value)
+    }
+
+    console.log(props.estimatedTime)
+
+    function allTags() {
+        let all = []
+        for(let i = 0; i < newPaths.length; i++) {
+            all.push(i)
+        }
+        setSelected(all)
     }
 
     return(
@@ -262,8 +214,9 @@ const AfterUpload = (props) => {
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
                         }}
+                        onClick={() => props.resetStates()}
                     >  
-                        <img className="iconCells" src={cellImg}></img>
+                        <img className="iconCells" src={cellImg} ></img>
                         JCell
                     </div>
                 </SidebarHeader>
@@ -271,7 +224,6 @@ const AfterUpload = (props) => {
                 <SidebarContent>
                     <Menu iconShape="round">
                         <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
-                        <MenuItem icon={<FiCornerUpLeft />} onClick={() => props.resetStates()}></MenuItem>
                     </Menu>
                     <Menu iconShape="round">
                         <SubMenu title="Masks" icon={<MdPhotoSizeSelectActual />}>
@@ -313,7 +265,11 @@ const AfterUpload = (props) => {
             {!props.pollingState || !newPaths ?
                 <div className="loading-container">
                     <h1>Wait while your image is being processed...</h1>
+                    {(props.estimatedTime != '?' && props.estimatedTime != '00:00') ?
                     <h2>Estimated Time: {props.estimatedTime}</h2>
+                    :
+                    undefined
+                    }
                     <ProgressBar percentage={props.percentage} />
                 </div>
             :      
@@ -345,6 +301,7 @@ const AfterUpload = (props) => {
                                 <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
                                 <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
                                 <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
+                                <button onClick={() => allTags()}><AiFillTags color={"white"}/></button>
                             </div>
                         </React.Fragment>
                         )}

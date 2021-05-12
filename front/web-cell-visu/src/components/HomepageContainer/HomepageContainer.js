@@ -130,12 +130,8 @@ const HomepageContainer = (props) => {
                     >Model: {model}</button>
                 </div>
                 <div className="info-container">
-                    <div className="info-card" onClick={()=>{segmentSample(1)}}>
-                        <img id="example1"src={example1} />
-                    </div>
-                    <div className="info-card" onClick={()=>{segmentSample(2)}}>
-                        <img id="example2" src={example2} />
-                    </div>
+                    <img className="info-card" src={example1} onClick={()=>{segmentSample(1)}}/>
+                    <img className="info-card" src={example2} onClick={()=>{segmentSample(2)}}/>
                 </div>
             </div>
             :

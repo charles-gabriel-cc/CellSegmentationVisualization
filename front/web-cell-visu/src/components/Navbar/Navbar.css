@@ -45,13 +45,13 @@
 }
 @media only screen and (max-width: 1000px) {
     .resizeIcons {
-        font-size: 6vmax;
+        font-size: 4vmax;
     }
     .navbar img {
-        font-size: 10vmax;
-        width: 12vw;
+        font-size: 5vmax;
+        width: 6vw;
     }
     .nav-title h1 {
-        font-size: 6vmax;
+        font-size: 4vmax;
     }
 }

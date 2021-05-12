@@ -46,14 +46,14 @@ const UploadDropzone = (props) => {
     return (
         <div {...getRootProps()} className="upload-container" data-toggle="tooltip" title={"Try to choose a model before upload"}> 
             <input {...getInputProps()} />
-            <BsUpload size={160} color={"white"} style={{marginBottom: "2rem"}}/>
+            <BsUpload size={110} color={"white"} style={{marginBottom: "2rem"}}/>
             {
             isDragActive ?
                 <div className="upload-help-text">
                     <h2>Drop the images here, or select one example image</h2>
                 </div> :
                 <div className="upload-help-text">
-                    <h2>Drag 'n' drop some image here, or click to select one on the right</h2>
+                    <h2>Upload some image here, or click to select one example</h2>
                 </div>
             }
         </div>
