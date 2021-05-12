@@ -126,20 +126,8 @@ const AfterUpload = (props) => {
             setZoomRate(zoomRate - 80)
         }
     }
-<<<<<<< HEAD
 
     if(accept && paths && !newPaths) {
-=======
-    /*{paths.map((paths, i) =>
-        <path
-            key={i}
-            id={i}
-            d={paths}
-            fill={"transparent"}
-        />
-    )} */
-    if (accept && paths && !newPaths) {
->>>>>>> fe0ea85f5cb581cd14e938e08d9d5fc76104260a
         setNewPaths(paths)
         props.setMenu(true)
     }
