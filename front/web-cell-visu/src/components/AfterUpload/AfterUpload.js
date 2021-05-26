@@ -73,9 +73,14 @@ const AfterUpload = (props) => {
     const [newPaths, setNewPaths] = useState(false)
     const [enumeration, setEnumeration] = useState(false)
     const [borders, setBorders] = useState(true);
+    const [innerHtml, setInnerHtml] = useState("")
 
 
     const route = API_IMAGE_ENDPOINT + props.imageId + '/' + 0
+
+    const updateInnerHtml = (newValue) => {
+        setInnerHtml(newValue)
+    }
 
     const updateZoomArea = (newValue) => {
         setZoomArea(newValue)
@@ -183,67 +188,9 @@ const AfterUpload = (props) => {
 
     const [collapsed, setCollapsed] = useState(true)
 
-<<<<<<< HEAD
-=======
-    /*
-        <div className="controlPanel">
-            <div className="combobox">
-                <Combobox updateType={updateType} type={state}/>
-            </div> 
-            Model:<br/> {props.description}
-            <Download imageId={props.imageId}/>
-        </div>   
-    */
-
-    /* {!props.pollingState || !newPaths ?
-         <div className="loading-container">
-             <h1>Wait while your image is being processed...</h1>
-             <h2>Estimated Time: {props.estimatedTime}</h2>
-             <ProgressBar percentage={props.percentage} />
-         </div>
-     :
-         <div>                 
-             <div className="results-card" onWheel={handleZoom}>
-                 <TransformWrapper>
-                     {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                     <React.Fragment>
-                         <div className="tools">
-                             <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
-                             <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
-                             <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
-                             <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
-                             <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
-                         </div>
-                         <div className="imageBorders">
-                             <TransformComponent>
-                                 <img id="log" className="imageBehind" style={toggleBack?{filter: colors[state][3]}:{filter: "brightness(0%)"}} src={route}/>
-                                 <SVG
-                                     sizes={sizes}
-                                     newPaths={newPaths}
-                                     borders={borders}
-                                     colors={colors}
-                                     enumeration={enumeration}
-                                     state={state}
-                                     imageId={props.imageId}
-                                     selected={selected}
-                                     setSelected={setSelected}
-                                 />
-                             </TransformComponent>
-                         </div>
-                     </React.Fragment>
-                     )}
-                 </TransformWrapper>
-             </div>
-         </div>
-     } */
-
->>>>>>> fe0ea85f5cb581cd14e938e08d9d5fc76104260a
     const handleState = (event) => {
         setState(event.target.value)
     }
-
-<<<<<<< HEAD
-    console.log(props.estimatedTime)
 
     function allTags() {
         let all = []
@@ -293,7 +240,7 @@ const AfterUpload = (props) => {
                             {props.description}
                         </SubMenu>
                         <MenuItem icon={<BsDownload/>}>
-                            <Download imageId={props.imageId}/>
+                            <Download imageId={props.imageId} innerHtml={innerHtml}/>
                         </MenuItem>
                     </Menu>
                 </SidebarContent>
@@ -316,71 +263,6 @@ const AfterUpload = (props) => {
                 </div>
                 </SidebarFooter>
             </ProSidebar>
-=======
-    return (
-        <div>
-            {!props.pollingState || !newPaths ? undefined :
-                <div className="after-upload-container">
-                    <ProSidebar collapsed={collapsed}>
-                        <SidebarHeader>
-                            <div
-                                style={{
-                                    padding: '24px',
-                                    textTransform: 'uppercase',
-                                    font: '42px Montserrat, sans-serif',
-                                    fontWeight: 'bold',
-                                    fontSize: 36,
-                                    letterSpacing: '1px',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                <img className="iconCells" src={cellImg}></img>
-                        JCell
-                    </div>
-                        </SidebarHeader>
-
-                        <SidebarContent>
-                            <Menu iconShape="round">
-                                <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
-                                <MenuItem icon={<FiCornerUpLeft />} onClick={() => props.resetStates()}></MenuItem>
-                            </Menu>
-                            <Menu iconShape="round">
-                                <SubMenu title="Masks" icon={<MdPhotoSizeSelectActual />}>
-                                    <Combobox
-                                        state={state}
-                                        handleState={handleState}
-                                    />
-                                </SubMenu>
-                                <SubMenu title="Model" icon={<BsInfoSquare />}>
-                                    {props.description}
-                                </SubMenu>
-                                <MenuItem icon={<BsDownload />}>
-                                    <Download imageId={props.imageId} />
-                                </MenuItem>
-                            </Menu>
-                        </SidebarContent>
-
-                        <SidebarFooter style={{ textAlign: 'center' }}>
-                            <div
-                                className="sidebar-btn-wrapper"
-                                style={{
-                                    padding: '20px 24px',
-                                }}
-                            >
-                                <a
-                                    href="https://github.com/charles-gabriel-cc/CellSegmentationVisualization"
-                                    target="_blank"
-                                    className="sidebar-btn"
-                                    rel="noopener noreferrer"
-                                >
-                                    <FiGithub />
-                                </a>
-                            </div>
-                        </SidebarFooter>
-                    </ProSidebar>
->>>>>>> fe0ea85f5cb581cd14e938e08d9d5fc76104260a
 
                 </div>
             }
@@ -396,7 +278,6 @@ const AfterUpload = (props) => {
                 </div>
                 :
                 <div className="results-container">
-<<<<<<< HEAD
                 <div className="results-card" onWheel={handleZoom}>
                     <TransformWrapper>
                         {({scale, zoomIn, zoomOut, resetTransform, ...rest }) => (
@@ -415,6 +296,7 @@ const AfterUpload = (props) => {
                                         selected={selected}
                                         setSelected={setSelected}
                                         scale={scale}
+                                        updateInnerHtml={updateInnerHtml}
                                     />
                                 </TransformComponent>
                             </div>
@@ -430,40 +312,6 @@ const AfterUpload = (props) => {
                         )}
                     </TransformWrapper>
                 </div>
-=======
-                    <div className="results-card" onWheel={handleZoom}>
-                        <TransformWrapper>
-                            {({ scale, zoomIn, zoomOut, resetTransform, ...rest }) => (
-                                <React.Fragment>
-                                    <div className="imageBorders">
-                                        <TransformComponent>
-                                            <img id="log" className="imageBehind" style={(toggleBack || state == 0) ? { filter: colors[state][3] } : { filter: "brightness(0%)" }} src={route} />
-                                            <SVG
-                                                sizes={sizes}
-                                                newPaths={newPaths}
-                                                borders={borders}
-                                                colors={colors}
-                                                enumeration={enumeration}
-                                                state={state}
-                                                imageId={props.imageId}
-                                                selected={selected}
-                                                setSelected={setSelected}
-                                                scale={scale}
-                                            />
-                                        </TransformComponent>
-                                    </div>
-                                    <div className="tools">
-                                        <button onClick={resetTransform}><MdZoomOutMap color={"white"} /></button>
-                                        <button onClick={zoomIn}><AiOutlineZoomIn color={"white"} /></button>
-                                        <button onClick={zoomOut}><AiOutlineZoomOut color={"white"} /></button>
-                                        <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"} /></button>
-                                        <button onClick={() => setSelected([])}><AiOutlineClear color={"white"} /></button>
-                                    </div>
-                                </React.Fragment>
-                            )}
-                        </TransformWrapper>
-                    </div>
->>>>>>> fe0ea85f5cb581cd14e938e08d9d5fc76104260a
                 </div>
             }
         </div>

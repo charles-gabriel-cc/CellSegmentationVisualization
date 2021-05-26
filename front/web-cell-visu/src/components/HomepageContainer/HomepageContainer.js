@@ -112,6 +112,35 @@ const HomepageContainer = (props) => {
         updateImageId(sampleId)
     }
 
+    const uploadData = (i) => {
+
+        const img =  document.getElementById(i)
+        
+        fetch(img.src)
+            .then(res => res.blob())
+            .then(blob => {
+               const file = new File([blob], `${i}.png`, blob)
+
+               updateImagePath(i)
+                
+               const formData = new FormData()
+               formData.append('image', file)
+               formData.append('model', model)
+               formData.append('gpu', false)
+       
+               const options = {
+                   method: 'POST',
+                   body: formData,
+               }
+       
+               const API_ENDPOINT = "https://www.jcell.org:3984/segmentation/"
+       
+               fetch(API_ENDPOINT, options).then(res => res.json()).then(res => {
+                   updateImageId(res['id'])
+               })
+            })
+    }
+
     return (
         !imagePath ?
             !pickModel ?
@@ -130,8 +159,8 @@ const HomepageContainer = (props) => {
                         >Model: {model}</button>
                     </div>
                     <div className="info-container">
-                        <img className="info-card" src={example1} onClick={()=>{segmentSample(1)}}/>
-                        <img className="info-card" src={example2} onClick={()=>{segmentSample(2)}}/>
+                        <img className="info-card" src={example1} onClick={()=>{uploadData("example1")}} id="example1"/>
+                        <img className="info-card" src={example2} onClick={()=>{uploadData("example2")}} id="example2"/>
                     </div>
                 </div>
                 :
@@ -141,13 +170,15 @@ const HomepageContainer = (props) => {
                     <Carousel breakPoints={breakPoints}>
                         {Object.keys(models).map((model, i) =>
                             <div className="container" key={i}>
-                                <img
-                                    key={i}
-                                    src={API_MODEL + model}
-                                    onClick={() => selectModel(model, Object.values(models)[i]['description'])}
-                                    data-toggle="tooltip"
-                                    title={model}
-                                />
+                                <div className="cropper">
+                                    <img
+                                        key={i}
+                                        src={API_MODEL + model}
+                                        onClick={() => selectModel(model, Object.values(models)[i]['description'])}
+                                        data-toggle="tooltip"
+                                        title={model}
+                                    />
+                                </div>
                                 <div class="text-block">
                                     <p>{Object.values(models)[i]['description']}</p>
                                 </div>

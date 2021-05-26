@@ -59,7 +59,7 @@
 .sidebar-btn-wrapper .sidebar-btn {
     padding: 10px 10px;
     border-radius: 40px;
-    background: var(--color-dark-hover);
+    background: var(--color-dark);
     color: #ffffff;
     font-size: 1.2rem;
     text-decoration: none;
@@ -110,7 +110,7 @@
 
 .tools button{
     margin-inline: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     width: 3rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

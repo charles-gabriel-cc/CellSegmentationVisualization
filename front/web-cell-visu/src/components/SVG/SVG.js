@@ -3,7 +3,6 @@ import { Tooltip } from "react-svg-tooltip";
 
 import './SVG.css'
 import * as d3 from 'd3'
-import ExamplePaths from '../../assets/ExamplePaths.js'
 
 
 const SVG = (props) => {
@@ -14,26 +13,16 @@ const SVG = (props) => {
 
     const [arrPaths, setArrPaths] = useState(props.newPaths)
 
-    const [choosePath, setChoosePath] = useState(false)
-
     const circleRef = createRef()
 
     const refs = useRef([])
 
-    if ((props.imageId == 1 || props.imageId == 2) && !choosePath) {
-        setArrPaths(ExamplePaths(props.imageId - 1))
-        setChoosePath(true)
-    }
-    console.log(arrPaths)
-
     const arrLength = arrPaths.length;
 
-    const [count, setCount] = useState(1)
 
     if (refs.current.length !== arrLength) {
         refs.current = Array(arrLength).fill().map((_, i) => refs.current[i] || createRef());
     }
-
 
     function getRandomColor(i) {
         const color = ["#f54242", "#eff542", "#54f542", "#42f2f5", "#0037ff", "#f700ff", "#014a11", "#fa6d2f", "#4b016e"]
@@ -54,14 +43,19 @@ const SVG = (props) => {
         }
     }
 
+    useEffect(() => {
+        var svgFile = document.getElementById("svgDiv").innerHTML;
+        props.updateInnerHtml(svgFile)
+    });
+
     return (
-        <div className="transforming">
-            <svg onLoad={() => setCount(count + 1)} id="svgDiv" version="1.0" xmlns="http://www.w3.org/2000/svg"
+        <div className="transforming" id="svgDiv">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                 className="imageAbove" viewBox={"0 0 " + props.sizes[0] + " " + props.sizes[1]}
                 preserveAspectRatio="xMidYMid meet">
                 <metadata>
                     Created by potrace 0.3, written by Peter Selinger 2001-2015
-        </metadata>
+                </metadata>
                 <g id="component" transform="scale(0.100000,0.100000)"
                     fill="#ffffff">
                     {arrPaths.map((paths, i) =>

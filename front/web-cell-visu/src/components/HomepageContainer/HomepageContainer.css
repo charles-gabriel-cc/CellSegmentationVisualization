@@ -32,27 +32,32 @@
     text-align: center;
 }
 
+.cropper{
+    overflow: hidden;
+    border-radius: 5%;
+    border: 6px solid white;
+}
+
 .carousel-models img {
     background-color: var(--color-dark-darker);
     max-height: 55vh;
     max-width: 30vw;
     width: auto;
     height: auto;
-    border-radius: 5%;
-    border: 3px solid white;
-    margin: 2rem;
     cursor: pointer;
+    margin: -2vh -1.8vw -2vh -1.8vw;
 }
 
 .container {
     position: relative;
+    overflow: hidden;
 }
 
 .text-block {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background-color: rgba(37,38,49,0.8);
+    background-color: rgba(37,38,49,0.6);
     color: white;
     padding-left: 20px;
     padding-right: 20px;

@@ -7,7 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { withStyles } from '@material-ui/core/styles';
-import { indigo } from '@material-ui/core/colors';
+import { green, indigo, lightGreen} from '@material-ui/core/colors';
 
 
 const Combobox = (props) => {
@@ -16,7 +16,7 @@ const Combobox = (props) => {
 		root: {
 		  color: "#ffffff",
 		  '&$checked': {
-			color: indigo[600],
+			color: lightGreen[700],
 		  },
 		},
 		checked: {},
