@@ -12,6 +12,7 @@ const SVG = (props) => {
     const SVG_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
 
     const [arrPaths, setArrPaths] = useState(props.newPaths)
+    const [segmentedDownload, setSegmentedDownload] = useState(false)
 
     const circleRef = createRef()
 
@@ -43,10 +44,12 @@ const SVG = (props) => {
         }
     }
 
+ 
     useEffect(() => {
         var svgFile = document.getElementById("svgDiv").innerHTML;
         props.updateInnerHtml(svgFile)
-    });
+    }, []);
+
 
     return (
         <div className="transforming" id="svgDiv">
