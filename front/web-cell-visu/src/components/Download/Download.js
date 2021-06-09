@@ -9,7 +9,7 @@ const Download = (props) => {
 	const ZIP_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
 
 	const svgFile = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">' + props.innerHtml 
-	console.log(svgFile)
+	
 	const downloadEmployeeData = () => {
 		fetch(ZIP_ENDPOINT)
 			.then(response => {

@@ -1,28 +1,18 @@
 import React, { useState } from 'react'
-import ReactImageMagnify from 'react-image-magnify'
-import * as d3 from 'd3'
-
-import ZoomModal from '../../components/ZoomModal/ZoomModal.js'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import Combobox from '../Combobox/Combobox.js'
 import Download from '../Download/Download.js'
 import SVG from '../SVG/SVG.js'
 
-import Button from 'react-bootstrap/Button'
-import Switch from "react-switch";
-import TextField from '@material-ui/core/TextField';
-
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 import { FiCornerUpLeft } from 'react-icons/fi'
-import { BsGear } from 'react-icons/bs'
 import { BsDownload, BsInfoSquare } from 'react-icons/bs'
 import { IoMdAlbums } from 'react-icons/io'
 import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineClear } from 'react-icons/ai'
 import { MdPhotoSizeSelectActual } from 'react-icons/md'
 import { MdZoomOutMap } from 'react-icons/md'
 import { FiGithub } from 'react-icons/fi'
-import { BsInfoCircle } from 'react-icons/bs'
 import {AiFillTags} from 'react-icons/ai'
 
 import cellImg from '../../assets/black-white-cells.png'
@@ -42,28 +32,15 @@ import 'react-pro-sidebar/dist/css/styles.css';
 
 import './AfterUpload.css'
 import './AfterUpload.scss'
-import { Icon } from '@material-ui/core'
-
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 
 const AfterUpload = (props) => {
 
     const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
 
-    const url = API_IMAGE_ENDPOINT + props.imageId + '/'
-
     const JSON_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 9;
-
-    const ZIP_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 11;
 
     const [open, setOpen] = useState(false)
     const [zoomArea, setZoomArea] = useState(45)
-    const handleClose = () => setOpen(false)
-    const handleOpen = () => setOpen(true)
     const [zoomRate, setZoomRate ] = useState(640)
     const [ paths, setPaths ] = useState(false)
     const [ state, setState ] = React.useState('1');
@@ -253,7 +230,7 @@ const AfterUpload = (props) => {
                     }}
                     >
                     <a
-                        href="https://github.com/charles-gabriel-cc/CellSegmentationVisualization"
+                        href="https://github.com/fagp/caltus_API"
                         target="_blank"
                         className="sidebar-btn"
                         rel="noopener noreferrer"
