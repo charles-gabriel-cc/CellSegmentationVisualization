@@ -194,6 +194,7 @@ const AfterUpload = (props) => {
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
+                            cursor: 'pointer'
                         }}
                         onClick={() => props.resetStates()}
                     >  
