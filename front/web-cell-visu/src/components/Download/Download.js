@@ -1,12 +1,14 @@
 import React from 'react';
 import { BsDownload } from 'react-icons/bs'
 import './Download.css'
+import JSZip from 'jszip'
+import saveAs from 'jszip'
 
 const Download = (props) => {
 
-	const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
+	const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
 
-	const ZIP_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
+	const ZIP_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 11;
 
 	const svgFile = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">' + props.innerHtml 
 	
@@ -37,11 +39,9 @@ const Download = (props) => {
 	}
 
 	return (
-		<div>
-			<a onClick={downloadSvg}>
-				<i>Download</i>
-			</a>
-		</div>
+		<a href={ZIP_ENDPOINT} download>
+			<i>Download</i>
+		</a>
 	)
 }
 export default Download;

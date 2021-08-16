@@ -1,7 +1,8 @@
 :root{
-    --color-dark: rgb(104, 71, 194);
+    --color-dark: rgb(255, 255, 255);
     --color-dark-hover:rgb(45, 47, 63);
-    --color-dark-darker: rgb(65, 42, 126);
+    --color-dark-darker: rgb(141, 176, 48);
+    --color-dark-text: rgb(0,0,0);
     --color-black: #242424;
     --color-green: #25ce4a;
     --color-red: #f00946;

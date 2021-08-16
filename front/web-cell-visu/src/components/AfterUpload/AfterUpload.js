@@ -14,8 +14,9 @@ import { MdPhotoSizeSelectActual } from 'react-icons/md'
 import { MdZoomOutMap } from 'react-icons/md'
 import { FiGithub } from 'react-icons/fi'
 import {AiFillTags} from 'react-icons/ai'
+import { ImListNumbered } from 'react-icons/im'
 
-import cellImg from '../../assets/black-white-cells.png'
+import cellImg from '../../assets/black-white-cells.svg'
 
 import { GiHamburgerMenu } from 'react-icons/gi'
 
@@ -35,7 +36,7 @@ import './AfterUpload.scss'
 
 const AfterUpload = (props) => {
 
-    const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
+    const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
 
     const JSON_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 9;
 
@@ -51,7 +52,9 @@ const AfterUpload = (props) => {
     const [enumeration, setEnumeration] = useState(false)
     const [borders, setBorders] = useState(true);
     const [innerHtml, setInnerHtml] = useState("")
+    const [numberToggle, setNumberToggle] = useState(true)
 
+    const color_value = 'black'
 
     const route = API_IMAGE_ENDPOINT + props.imageId + '/' + 0
 
@@ -163,6 +166,11 @@ const AfterUpload = (props) => {
 
     const [selected, setSelected] = useState([])
 
+    const updateSelected = () => {
+        setSelected([])
+        setNumberToggle(true)
+    }
+
     const [collapsed, setCollapsed] = useState(true)
 
     const handleState = (event) => {
@@ -175,19 +183,20 @@ const AfterUpload = (props) => {
             all.push(i)
         }
         setSelected(all)
+        setNumberToggle(false)
     }
 
     return(
         <div>
         {!props.pollingState || !newPaths ? undefined :
         <div className="after-upload-container">
-            <ProSidebar collapsed={collapsed}>
+            <ProSidebar collapsed={collapsed} style={{borderRight: "1px solid black" }}>
                 <SidebarHeader>
                     <div
                         style={{
                             padding: '24px',
                             textTransform: 'uppercase',
-                            font: '42px Montserrat, sans-serif',
+                            font: '3rem Montserrat, sans-serif',
                             fontWeight: 'bold',
                             fontSize: 36,
                             letterSpacing: '1px',
@@ -241,7 +250,6 @@ const AfterUpload = (props) => {
                 </div>
                 </SidebarFooter>
             </ProSidebar>
-
                 </div>
             }
             {!props.pollingState || !newPaths ?
@@ -279,12 +287,11 @@ const AfterUpload = (props) => {
                                 </TransformComponent>
                             </div>
                             <div className="tools">
-                                <button onClick={resetTransform}><MdZoomOutMap color={"white"}/></button>
-                                <button onClick={zoomIn}><AiOutlineZoomIn color={"white"}/></button>
-                                <button onClick={zoomOut}><AiOutlineZoomOut color={"white"}/></button>
-                                <button onClick={() => setToggleBack(!toggleBack)}><IoMdAlbums color={"white"}/></button>
-                                <button onClick={() => setSelected([])}><AiOutlineClear color={"white"}/></button>
-                                <button onClick={() => allTags()}><AiFillTags color={"white"}/></button>
+                                <button onClick={resetTransform} data-toggle="tooltip" title={"resize"}><MdZoomOutMap color={color_value} /></button>
+                                <button onClick={zoomIn} data-toggle="tooltip" title={"zoom"}><AiOutlineZoomIn color={color_value}/></button>
+                                <button onClick={zoomOut} data-toggle="tooltip" title={"zoom"}><AiOutlineZoomOut color={color_value}/></button>
+                                <button onClick={() => setToggleBack(!toggleBack)} data-toggle="tooltip" title={"change background"}><IoMdAlbums color={color_value}/></button>
+                                <button onClick={numberToggle ? () => allTags() : () => updateSelected()} data-toggle="tooltip" title={"enable/unable tags"}><ImListNumbered color={color_value}/></button>
                             </div>
                         </React.Fragment>
                         )}

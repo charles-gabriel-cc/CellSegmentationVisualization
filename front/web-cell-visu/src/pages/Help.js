@@ -11,7 +11,7 @@ const Help = () => {
         <>
             <Navbar />
             <Link to='/' style={{margin: "1rem"}}>
-                <FiCornerUpLeft size={64} color={"white"} style={{backgroundColor: "transparent"}}/>
+                <FiCornerUpLeft size={64} color={"black"} style={{backgroundColor: "transparent"}}/>
             </Link>
         </>
     );

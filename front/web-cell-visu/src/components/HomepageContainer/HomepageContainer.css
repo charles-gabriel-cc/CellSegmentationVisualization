@@ -1,11 +1,43 @@
-.homepage-container{
-    background: transparent;
-    height: 85vh;
+.homepage-container-body{
+    height: 100vh;
     width: 100vw;
     display: flex;
+    justify-content: left;
+    position: fixed;
+}
+.pro-sidebar{
+    position: fixed;
+}
+.homepage-container{
+    position: absolute;
+    background: transparent;
+    height: 100vh;
+    width: 90vw;
     justify-content: space-around;
     align-items: center;
+    margin-top: 1rem;
+    margin-left: 6rem;
+    overflow-y:auto;
+}
 
+.homepage-container::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: grey;
+}
+
+.homepage-container::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: var(--color-dark-darker);
+}
+
+.homepage-container::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: var(--color-dark-darker);
 }
 
 .carousel-models {
@@ -18,15 +50,57 @@
     flex-direction: column;
 }
 
+.btn-toggle {
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-dark-darker);
+    color: #000;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    position: fixed;
+    margin-left: 1rem;
+}
+
+.styling-carousel{
+    height: 85vh;
+    width: 100vw;
+    margin-top: 5rem;
+    
+}
+
+.rec.rec-arrow {
+    color: black;
+}
+
+.rec.rec-arrow:hover {
+    color: black;
+}
+
+button.rec-dot{
+    background-color: var(--color-dark);
+    box-shadow: 0 0 1px 3px var(--color-dark-text);
+  }
+  
+button.rec-dot:hover, button.rec-dot:active, button.rec-dot:focus  {
+    box-shadow: 0 0 1px 3px var(--color-dark-darker);
+    background-color: var(--color-dark-darker);
+}
+
 .carousel-models h1{
-    margin: 1rem;
-    color: white;
+    margin: 2rem;
+    margin-top: 10rem;
+    color: var(--color-dark-text);
     position: relative;
     top: 3%;
     font: 1.5rem Montserrat, sans-serif;
     background-color: var(--color-dark-darker);
     border-radius: 10px;
-    border: 2px solid white;
+    border: 2px solid var(--color-dark-text);
     padding: 1rem;
     font-weight: 600;
     text-align: center;
@@ -35,7 +109,7 @@
 .cropper{
     overflow: hidden;
     border-radius: 5%;
-    border: 6px solid white;
+    border: 4px solid var(--color-dark-text);;
 }
 
 .carousel-models img {
@@ -57,7 +131,7 @@
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background-color: rgba(37,38,49,0.6);
+    background-color: var(--color-dark-darker);
     color: white;
     padding-left: 20px;
     padding-right: 20px;
@@ -65,22 +139,28 @@
   }
 
 .backIcon {
-    position: fixed;
-    top: 5rem;
+    position: absolute;
+    top: 12vh;
     left: 8px;
-    font-size: 4vmax;
+    font-size: 3rem;
     cursor: pointer;
 }
 
-.homepage-container button{
-    color: white;
+.model-button{
+    color: var(--color-dark-text);;
     font: 1rem Montserrat, sans-serif;
-    margin: 1rem;
     background-color: var(--color-dark-darker);
     border-radius: 10px;
-    border: 2px solid white;
+    border: 2px solid var(--color-dark-text);;
     padding: 0.5rem;
     font-weight: 600;
+    max-width: 11vw;
+    margin-top: 1rem;
+}
+
+.pick-model{
+    display: flex;
+    flex-direction: column;
 }
 
 .homepage-container button:hover{background-color: var(--color-dark-hover);}
@@ -96,12 +176,6 @@
     width: 80%;
 }
 
-.info-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .info-card{
     background-color: var(--color-dark-darker);
@@ -112,7 +186,7 @@
     margin-top: 1rem;
     animation: fadein 1.8s;
     border-radius: 3%;
-    border: 4px solid white;
+    border: 3px solid var(--color-dark-text);;
     -webkit-animation: fadein 1.4s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 1.4s; /* Firefox < 16 */
     -ms-animation: fadein 1.4s; /* Internet Explorer */
@@ -123,6 +197,12 @@
 
 .info-card:hover{
     cursor: pointer;
+}
+
+.uploadbs {
+    position: fixed;
+    z-index: 1600;
+    margin-bottom: 2rem;
 }
 
 @keyframes fadein{
@@ -164,12 +244,7 @@
 }
 
 @media screen and (max-width: 1000px) and (orientation: portrait) {
-    .homepage-container{
-        display: flex;
-        flex-direction: column;
-        justify-content: normal;
-        align-items: center;
-    }
+
     .info-container{
         width: 90vw;
         height: 30vh;
@@ -179,7 +254,7 @@
         margin: 1.5rem;
         width: 50vw;
         height: 25vh;
-        border: 6px solid white;
+        border: 6px solid var(--color-dark-text);;
     }
 
     .selection-image {
@@ -187,25 +262,21 @@
         height: 40vh;
     }
 
-    .homepage-container button{
-        font: 2rem Montserrat, sans-serif;
-        border: 6px solid white;
+    .model-button{
+        font: 1.5rem Montserrat, sans-serif;
+        border: 3px solid var(--color-dark-text);;
         font-weight: 600;
-        border-radius: 2rem;
-        padding: 1.5rem;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
     }
 
     .carousel-models h1 {
         font-size: 3rem;
-        border: 6px solid white;
+        border: 6px solid var(--color-dark-text);;
         padding: 3rem;
         width: 80vw;    
     }
 
-    .backIcon{
-        top: 13rem;
-        font-size: 6vmax;
-    }
     .container img{
         max-width: 70vw;
         max-height: 75vh;

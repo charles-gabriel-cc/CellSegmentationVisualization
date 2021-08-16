@@ -7,12 +7,7 @@ const Homepage = () => {
     const [ menu, setMenu ] = useState(false)
 
     return(
-        <>
-            {!menu?
-            <Navbar/>
-            :
-            undefined
-            }   
+        <> 
             <HomepageContainer 
                 setMenu={setMenu}
             />

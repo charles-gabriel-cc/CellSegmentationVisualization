@@ -7,7 +7,7 @@ import * as d3 from 'd3'
 
 const SVG = (props) => {
 
-    const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
+    const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
 
     const SVG_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
 
@@ -79,7 +79,7 @@ const SVG = (props) => {
                                 <polygon
                                     points={(-5 / props.scale) + "," + (-10 / props.scale) + " "
                                         + (5 / props.scale) + "," + (-10 / props.scale) + " 0,0"}
-                                    fill="#252631"
+                                    fill="#8db030"
                                     opacity="0.8"
                                     rx={10}
                                     ry={10}
@@ -91,14 +91,14 @@ const SVG = (props) => {
                                     height={35 / props.scale}
                                     rx={10 / props.scale}
                                     ry={10 / props.scale}
-                                    fill="#252631"
+                                    fill="#8db030"
                                     opacity="0.8"
                                 />
                                 <text
                                     x={(i < 10) ? -6 / props.scale : (i < 100) ? -12 / props.scale : -18 / props.scale}
                                     y={-20 / props.scale}
                                     fontSize={25 / props.scale}
-                                    fill="white"
+                                    fill="black"
                                 >
                                     {i}
                                 </text>
@@ -113,7 +113,7 @@ const SVG = (props) => {
                                     (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) + 60 / props.scale) + "," + (parseInt(arrPaths[index].split(" ")[1]) - 120 / props.scale) + " " +
                                     (parseInt(arrPaths[index].split(" ")[0].replace("M", ""))) + "," + (parseInt(arrPaths[index].split(" ")[1]) - 40 / props.scale)
                                 }
-                                fill="#252631"
+                                fill="#8db030"
                                 opacity="0.8"
                                 rx={10 / props.scale}
                                 ry={10 / props.scale}
@@ -125,14 +125,14 @@ const SVG = (props) => {
                                 height={280 / props.scale}
                                 rx={100 / props.scale}
                                 ry={100 / props.scale}
-                                fill="#252631"
+                                fill="#8db030"
                                 opacity="0.8"
                             />
                             <text
                                 x={(index < 10) ? (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 30 / props.scale) : (index < 100) ? (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 90 / props.scale) : (parseInt(arrPaths[index].split(" ")[0].replace("M", "")) - 130 / props.scale)}
                                 y={(parseInt(arrPaths[index].split(" ")[1]) - 200 / props.scale)}
                                 fontSize={200 / props.scale}
-                                fill="white"
+                                fill="black"
                             >
                                 {index}
                             </text>

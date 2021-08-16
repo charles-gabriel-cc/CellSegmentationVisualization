@@ -1,6 +1,6 @@
 import React from 'react'
 
-import cellImg from '../../assets/black-white-cells.png'
+import cellImg from '../../assets/black-white-cells.svg'
 
 import { Link } from 'react-router-dom'
 
@@ -18,10 +18,10 @@ const Navbar = () => {
             </div>
             <div className="nav-icons">
                 <Link to='/help' className="nav-icon">
-                    <BsInfoCircle className="resizeIcons" color={"white"} />
+                    <BsInfoCircle className="resizeIcons" color={"black"} />
                 </Link>
-                <a href="https://github.com/charles-gabriel-cc/CellSegmentationVisualization"className="nav-icon">
-                    <FiGithub className="resizeIcons" color={"white"} />
+                <a href="https://github.com/fagp/caltus_API"className="nav-icon">
+                    <FiGithub className="resizeIcons" color={"black"} />
                 </a>
             </div>
         </div>

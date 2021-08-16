@@ -1,10 +1,11 @@
 .upload-container{
-    height: 55vh;
-    width: 55vw;
+    height: 6vh;
+    width: 15vw;
     background-color: var(--color-dark-darker);
-    border: 3px dashed white;
+    border: 2px dashed black;
     border-radius: 5%;
 
+    max-width: 14rem;
     -webkit-animation: fadein 1.4s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 1.4s; /* Firefox < 16 */
     -ms-animation: fadein 1.4s; /* Internet Explorer */
@@ -14,14 +15,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
-}
-
-.upload-container h2{
-    font: 32px Montserrat, sans-serif;
-    font-weight: 600;
-    color: white;
 }
 
 .upload-container:hover{
@@ -29,16 +24,14 @@
 }
 .upload-help-text h2{
     font-size: 1rem;
+    margin: 1rem;
 }
 
+.bs-icon{
+    margin-left: 1rem;
+}
 @media screen and (max-width: 1000px) and (orientation: portrait) {
-    .upload-help-text h2{
-        font-size: 50px;
-    }
-    .upload-container{
-        height: 35vh;
-        width: 80vw;
-        margin: 2.5rem;
-        border: 6px dashed white;
+    .upload-help-text{
+        font-size: 0.5rem;
     }
 }

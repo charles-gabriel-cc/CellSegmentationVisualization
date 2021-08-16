@@ -4,6 +4,8 @@
     background-color: var(--color-dark-darker);
     display: flex;
     align-items: center;
+    border-bottom: 2px solid black;
+    position: fixed;
 }
 
 .navbar img{
@@ -21,7 +23,7 @@
 .navbar h1{
     display: inline;
     font: 42px Montserrat, sans-serif;
-    color: white;
+    color: var(--color-dark-text);
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -53,5 +55,9 @@
     }
     .nav-title h1 {
         font-size: 4vmax;
+    }
+    .navbar{
+        border-bottom: 1px solid black;
+        
     }
 }

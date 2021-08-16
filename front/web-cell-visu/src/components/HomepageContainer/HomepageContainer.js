@@ -14,7 +14,28 @@ import ExampleUp from '../../assets/example-image-5.svg'
 import { FiCornerUpLeft } from 'react-icons/fi'
 
 import AfterUpload from '../AfterUpload/AfterUpload'
+import Photoswipe from '../Photoswipe/Photoswipe'
+import Modelswipe from '../Modelswipe/Modelswipe'
 import { rgbToHex } from '@material-ui/core'
+
+import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl-layout';
+
+import {
+    ProSidebar,
+    Menu,
+    MenuItem,
+    SubMenu,
+    SidebarHeader,
+    SidebarFooter,
+    SidebarContent,
+} from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
+
+import { GiHamburgerMenu } from 'react-icons/gi'
+
+import { BsDownload, BsInfoSquare, BsUpload } from 'react-icons/bs'
+
+import cellImg from '../../assets/black-white-cells.svg'
 
 const HomepageContainer = (props) => {
     const [imagePath, setImagePath] = useState('')
@@ -37,9 +58,13 @@ const HomepageContainer = (props) => {
 
     const [description, setDescription] = useState('Generalist');
 
-    const API_RESULT_ENDPOINT = "https://www.jcell.org:3984/result/"
+    const [photosDic, setPhotosDic] = useState('');
 
-    const API_MODEL = "https://www.jcell.org:3984/models/"
+    const API_RESULT_ENDPOINT = "http://localhost:5000/result/"
+
+    const API_MODEL = "http://localhost:5000/models/"
+
+    const color_value = 'black'
 
     const updateImageId = (newId) => {
         setImageId(newId)
@@ -59,7 +84,12 @@ const HomepageContainer = (props) => {
 
     fetch(API_MODEL).then(res => res.json()).then(res => {
         if (!models) {
+            var aux = []
+            for(const [key, val] of Object.entries(res)) {
+                aux.push({src: API_MODEL+key, name:key , width:4, height:4, description: val.description})
+            }
             updateModels(res)
+            setPhotosDic(aux)
         }
     })
 
@@ -133,7 +163,7 @@ const HomepageContainer = (props) => {
                    body: formData,
                }
        
-               const API_ENDPOINT = "https://www.jcell.org:3984/segmentation/"
+               const API_ENDPOINT = "http://localhost:5000/segmentation/"
        
                fetch(API_ENDPOINT, options).then(res => res.json()).then(res => {
                    updateImageId(res['id'])
@@ -141,50 +171,132 @@ const HomepageContainer = (props) => {
             })
     }
 
+    const smallItemStyles = React.CSSProperties = {
+        cursor: 'pointer',
+        objectFit: 'cover',
+        width: '50%',
+        maxHeight: '100%',
+      }
+
+    //<img className="info-card" src={example1} onClick={()=>{uploadData("example1")}} id="example1"/>
+    //<img className="info-card" src={example2} onClick={()=>{uploadData("example2")}} id="example2"/>  
+
+    const [collapsed, setCollapsed] = useState(true)
     return (
         !imagePath ?
             !pickModel ?
+                <div className="homepage-container-body">
+                <ProSidebar collapsed={collapsed} toggled={true} style={{borderRight: "1px solid black" }}>
+                    <SidebarHeader>
+                        <div
+                            style={{
+                                padding: '24px',
+                                textTransform: 'uppercase',
+                                font: '3rem Montserrat, sans-serif',
+                                fontWeight: 'bold',
+                                fontSize: 36,
+                                letterSpacing: '1px',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                            }}
+                           
+                        >  
+                            <img className="iconCells" src={cellImg} ></img>
+                            JCell
+                        </div>
+                    </SidebarHeader>
+                    <SidebarContent>
+                        <Menu iconShape="round">
+                            <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
+                        </Menu>
+                        <Menu iconShape="round">
+                        <SubMenu title="Model" icon={<BsInfoSquare />}>
+                            <div className="pick-model">
+                                {description}
+                                <button 
+                                    data-toggle="tooltip" 
+                                    title={"Model: " + model} 
+                                    onClick={() => updatePickModel(true)}
+                                    className="model-button"
+                                >Pick a model</button>
+                            </div>
+                        </SubMenu>
+                        <SubMenu title="Submit" icon={<BsUpload></BsUpload>}>
+                            <UploadDropzone
+                                updateImagePath={updateImagePath}   
+                                updateImageId={updateImageId}
+                                updatePickModel={updatePickModel}
+                                model={model}
+                            />
+                        </SubMenu>
+                    </Menu>
+                    </SidebarContent>
+                </ProSidebar>
                 <div className="homepage-container">
-                    <div className="upload-container-model">
-                        <UploadDropzone
-                            updateImagePath={updateImagePath}   
-                            updateImageId={updateImageId}
-                            updatePickModel={updatePickModel}
-                            model={model}
-                        />
-                        <button 
-                            data-toggle="tooltip" 
-                            title={"Model: " + model} 
-                            onClick={() => updatePickModel(true)}
-                        >Model: {model}</button>
-                    </div>
-                    <div className="info-container">
-                        <img className="info-card" src={example1} onClick={()=>{uploadData("example1")}} id="example1"/>
-                        <img className="info-card" src={example2} onClick={()=>{uploadData("example2")}} id="example2"/>
-                    </div>
+                    <Photoswipe
+                        uploadData={uploadData}
+                    ></Photoswipe>
+                </div>
                 </div>
                 :
-                <div className="carousel-models">
-                    <FiCornerUpLeft className="backIcon" color={"white"} onClick={() => updatePickModel(false)} />
-                    <h1>Click on the most similar to your image that will be segmented</h1>
-                    <Carousel breakPoints={breakPoints}>
-                        {Object.keys(models).map((model, i) =>
-                            <div className="container" key={i}>
-                                <div className="cropper">
-                                    <img
-                                        key={i}
-                                        src={API_MODEL + model}
-                                        onClick={() => selectModel(model, Object.values(models)[i]['description'])}
-                                        data-toggle="tooltip"
-                                        title={model}
-                                    />
-                                </div>
-                                <div class="text-block">
-                                    <p>{Object.values(models)[i]['description']}</p>
-                                </div>
+                <div className="homepage-container-body">
+                    <ProSidebar collapsed={collapsed} toggled={true} style={{borderRight: "1px solid black" }}>
+                        <SidebarHeader>
+                            <div
+                                style={{
+                                    padding: '24px',
+                                    textTransform: 'uppercase',
+                                    font: '3rem Montserrat, sans-serif',
+                                    fontWeight: 'bold',
+                                    fontSize: 36,
+                                    letterSpacing: '1px',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => updatePickModel(false)}
+                            >  
+                                <img className="iconCells" src={cellImg} ></img>
+                                JCell
                             </div>
-                        )}
-                    </Carousel>
+                        </SidebarHeader>
+                        <SidebarContent>
+                            <Menu iconShape="round">
+                                <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
+                            </Menu>
+                            <Menu iconShape="round">
+                            <SubMenu title="Model" icon={<BsInfoSquare />}>
+                                <div className="pick-model">
+                                    {description}
+                                    <button 
+                                        data-toggle="tooltip" 
+                                        title={"Model: " + model} 
+                                        onClick={() => updatePickModel(true)}
+                                        className="model-button"
+                                    >Pick a model</button>
+                                </div>
+                            </SubMenu>
+                            <SubMenu title="Submit" icon={<BsUpload></BsUpload>}>
+                                <UploadDropzone
+                                    updateImagePath={updateImagePath}   
+                                    updateImageId={updateImageId}
+                                    updatePickModel={updatePickModel}
+                                    model={model}
+                                />
+                            </SubMenu>
+                        </Menu>
+                        </SidebarContent>
+                    </ProSidebar>
+                    <FiCornerUpLeft className="backIcon" color={"black"} onClick={() => updatePickModel(false)} />
+                    <div className="homepage-container">
+                    <Modelswipe
+                        photosDic={photosDic}
+                        API_MODEL={API_MODEL}
+                        selectModel={selectModel}
+                    />
+                    </div>
                 </div>
             :
             <AfterUpload

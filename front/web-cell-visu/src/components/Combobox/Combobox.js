@@ -14,9 +14,9 @@ const Combobox = (props) => {
 
 	const WhiteRadio = withStyles({
 		root: {
-		  color: "#ffffff",
+		  color: "#000000",
 		  '&$checked': {
-			color: lightGreen[700],
+			color: '#000000',
 		  },
 		},
 		checked: {},
@@ -26,7 +26,7 @@ const Combobox = (props) => {
 	<FormControl component="fieldset">
 		<FormLabel component="legend"></FormLabel>
 		<RadioGroup value={props.state} onChange={props.handleState}>
-			<FormControlLabel value="0" control={<WhiteRadio size="small"/>} label="None" />
+			<FormControlLabel value="0" control={<WhiteRadio size="small"/>} label="None"/>
 			<FormControlLabel value="5" control={<WhiteRadio size="small"/>} label="Bound Overlay" />
 			<FormControlLabel value="1" control={<WhiteRadio size="small" checked={props.state === '1'}/>} label="Object Overlay" />
 		</RadioGroup>
