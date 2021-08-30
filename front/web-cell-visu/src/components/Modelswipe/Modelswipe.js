@@ -29,7 +29,7 @@ const Modelswipe = (props) => {
         className="photoswipe-button"
         onClick={() => props.selectModel(currentView['name'], currentView['description'])}
       >
-        Submit
+        Select
       </button>
       <img src={currentView['src']} id={currentView['src']} style={{display: "none"}}/>
     </div>
@@ -45,7 +45,7 @@ const Modelswipe = (props) => {
               currentIndex={currentImage}
               views={props.photosDic.map((x, i) => ({
                 ...x,
-                srcset: x.srcset,
+                srcset: x.src,
                 caption: x.description
               }))}
               components={{Footer: CustomFooter}}

@@ -1,11 +1,5 @@
 .upload-container{
-    height: 6vh;
-    width: 15vw;
-    background-color: var(--color-dark-darker);
-    border: 2px dashed black;
-    border-radius: 5%;
 
-    max-width: 14rem;
     -webkit-animation: fadein 1.4s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 1.4s; /* Firefox < 16 */
     -ms-animation: fadein 1.4s; /* Internet Explorer */
@@ -13,25 +7,8 @@
     animation: fadein 1.4s;
 
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
     flex-direction: row;
-    text-align: center;
-}
-
-.upload-container:hover{
-    cursor: pointer;
-}
-.upload-help-text h2{
-    font-size: 1rem;
-    margin: 1rem;
-}
-
-.bs-icon{
-    margin-left: 1rem;
-}
-@media screen and (max-width: 1000px) and (orientation: portrait) {
-    .upload-help-text{
-        font-size: 0.5rem;
-    }
+    text-align: left;
 }

@@ -146,18 +146,6 @@ button.rec-dot:hover, button.rec-dot:active, button.rec-dot:focus  {
     cursor: pointer;
 }
 
-.model-button{
-    color: var(--color-dark-text);;
-    font: 1rem Montserrat, sans-serif;
-    background-color: var(--color-dark-darker);
-    border-radius: 10px;
-    border: 2px solid var(--color-dark-text);;
-    padding: 0.5rem;
-    font-weight: 600;
-    max-width: 11vw;
-    margin-top: 1rem;
-}
-
 .pick-model{
     display: flex;
     flex-direction: column;

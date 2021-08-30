@@ -1,13 +1,11 @@
 .photoswipe-button{
-    color: var(--color-dark-text);;
-    font: 1rem Montserrat, sans-serif;
-    background-color: var(--color-dark-darker);
-    border-radius: 10px;
-    border: 2px solid var(--color-dark-text);;
+    color: white;
+    font: 1rem;
+    background-color: black;
     padding: 0.5rem;
-    font-weight: 600;
     max-width: 12vw;
     top: 90vh;
     left: 48vw;
     position: fixed;
+    opacity: 75%;
 }

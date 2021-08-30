@@ -19,7 +19,7 @@ const UploadDropzone = (props) => {
             body: formData,
         }
 
-        const API_ENDPOINT = "http://localhost:5000/segmentation/"
+        const API_ENDPOINT = "https://www.jcell.org:3984/segmentation/"
 
         fetch(API_ENDPOINT, options).then(res => res.json()).then(res => {
             props.updateImageId(res['id'])
@@ -45,16 +45,7 @@ const UploadDropzone = (props) => {
     return (
         <div {...getRootProps()} className="upload-container" data-toggle="tooltip" title={"Try to choose a model before upload"}>
             <input {...getInputProps()} />
-            <BsUpload size='2rem' color={props.color_value} className="bs-icon"/>
-            {
-            isDragActive ?
-                <div className="upload-help-text">
-                    <h2>Drop the images here, or select one example image</h2>
-                </div> :
-                <div className="upload-help-text">
-                    <h2>Submit an image</h2>
-                </div>
-            }
+            Submit an image
         </div>
     )
 }

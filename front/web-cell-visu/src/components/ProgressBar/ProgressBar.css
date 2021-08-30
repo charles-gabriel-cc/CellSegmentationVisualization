@@ -5,6 +5,7 @@
     width: 70%;
     border-radius: 50px;
     border: 1px solid var(--color-dark-text);
+    background: white;
 }
 
 .filler{

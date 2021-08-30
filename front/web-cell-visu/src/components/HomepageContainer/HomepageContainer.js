@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import $ from "jquery"
 
 import './HomepageContainer.css'
 
@@ -35,6 +36,10 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 
 import { BsDownload, BsInfoSquare, BsUpload } from 'react-icons/bs'
 
+import { MdPhotoSizeSelectActual } from 'react-icons/md'
+
+import { FiGithub } from 'react-icons/fi'
+
 import cellImg from '../../assets/black-white-cells.svg'
 
 const HomepageContainer = (props) => {
@@ -60,9 +65,9 @@ const HomepageContainer = (props) => {
 
     const [photosDic, setPhotosDic] = useState('');
 
-    const API_RESULT_ENDPOINT = "http://localhost:5000/result/"
+    const API_RESULT_ENDPOINT = "https://www.jcell.org:3984/result/"
 
-    const API_MODEL = "http://localhost:5000/models/"
+    const API_MODEL = "https://www.jcell.org:3984/models/"
 
     const color_value = 'black'
 
@@ -81,20 +86,21 @@ const HomepageContainer = (props) => {
     const updateModels = (newModels) => {
         setModels(newModels)
     }
-
+    
     fetch(API_MODEL).then(res => res.json()).then(res => {
         if (!models) {
             var aux = []
             for(const [key, val] of Object.entries(res)) {
-                aux.push({src: API_MODEL+key, name:key , width:4, height:4, description: val.description})
+                aux.push({src: API_MODEL+key, name:key , description: val.description})
             }
             updateModels(res)
             setPhotosDic(aux)
         }
     })
 
+
     const selectModel = (model, description) => {
-        updatePickModel(false)
+        alert("Model switched")
         updateModel(model)
         setDescription(description);
     }
@@ -163,7 +169,7 @@ const HomepageContainer = (props) => {
                    body: formData,
                }
        
-               const API_ENDPOINT = "http://localhost:5000/segmentation/"
+               const API_ENDPOINT = "https://www.jcell.org:3984/segmentation/"
        
                fetch(API_ENDPOINT, options).then(res => res.json()).then(res => {
                    updateImageId(res['id'])
@@ -200,7 +206,6 @@ const HomepageContainer = (props) => {
                                 textOverflow: 'ellipsis',
                                 whiteSpace: 'nowrap',
                             }}
-                           
                         >  
                             <img className="iconCells" src={cellImg} ></img>
                             JCell
@@ -211,29 +216,44 @@ const HomepageContainer = (props) => {
                             <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
                         </Menu>
                         <Menu iconShape="round">
-                        <SubMenu title="Model" icon={<BsInfoSquare />}>
+                        <MenuItem onClick={() => updatePickModel(true)} title="Model" icon={<MdPhotoSizeSelectActual />}>
+                            Pick a model
+                        </MenuItem>
+                        <SubMenu title="About the model" icon={<BsInfoSquare />}>
                             <div className="pick-model">
                                 {description}
-                                <button 
-                                    data-toggle="tooltip" 
-                                    title={"Model: " + model} 
-                                    onClick={() => updatePickModel(true)}
-                                    className="model-button"
-                                >Pick a model</button>
                             </div>
                         </SubMenu>
-                        <SubMenu title="Submit" icon={<BsUpload></BsUpload>}>
+                        <MenuItem icon={<BsUpload></BsUpload>}>
                             <UploadDropzone
                                 updateImagePath={updateImagePath}   
                                 updateImageId={updateImageId}
                                 updatePickModel={updatePickModel}
                                 model={model}
                             />
-                        </SubMenu>
+                        </MenuItem>
                     </Menu>
                     </SidebarContent>
+                    <SidebarFooter  style={{ textAlign: 'center' }}>
+                    <div
+                        className="sidebar-btn-wrapper"
+                        style={{
+                            padding: '20px 24px',
+                        }}
+                        >
+                        <a
+                            href="https://github.com/fagp/caltus_API"
+                            target="_blank"
+                            className="sidebar-btn"
+                            rel="noopener noreferrer"
+                        >
+                        <FiGithub />
+                        </a>
+                    </div>
+                    </SidebarFooter>
                 </ProSidebar>
                 <div className="homepage-container">
+                    Try to submit an example image below:
                     <Photoswipe
                         uploadData={uploadData}
                     ></Photoswipe>
@@ -256,7 +276,7 @@ const HomepageContainer = (props) => {
                                     whiteSpace: 'nowrap',
                                     cursor: 'pointer'
                                 }}
-                                onClick={() => updatePickModel(false)}
+                                onClick={()=> updatePickModel(false)}
                             >  
                                 <img className="iconCells" src={cellImg} ></img>
                                 JCell
@@ -267,35 +287,49 @@ const HomepageContainer = (props) => {
                                 <MenuItem icon={<GiHamburgerMenu />} onClick={() => setCollapsed(!collapsed)}></MenuItem>
                             </Menu>
                             <Menu iconShape="round">
-                            <SubMenu title="Model" icon={<BsInfoSquare />}>
+                            <MenuItem onClick={() => updatePickModel(true)} title="Model" icon={<MdPhotoSizeSelectActual />}>
+                                Pick a model
+                            </MenuItem>
+                            <SubMenu title="About the model" icon={<BsInfoSquare />}>
                                 <div className="pick-model">
                                     {description}
-                                    <button 
-                                        data-toggle="tooltip" 
-                                        title={"Model: " + model} 
-                                        onClick={() => updatePickModel(true)}
-                                        className="model-button"
-                                    >Pick a model</button>
                                 </div>
                             </SubMenu>
-                            <SubMenu title="Submit" icon={<BsUpload></BsUpload>}>
+                            <MenuItem icon={<BsUpload></BsUpload>}>
                                 <UploadDropzone
                                     updateImagePath={updateImagePath}   
                                     updateImageId={updateImageId}
                                     updatePickModel={updatePickModel}
                                     model={model}
                                 />
-                            </SubMenu>
+                            </MenuItem>
                         </Menu>
                         </SidebarContent>
+                        <SidebarFooter  style={{ textAlign: 'center' }}>
+                        <div
+                            className="sidebar-btn-wrapper"
+                            style={{
+                                padding: '20px 24px',
+                            }}
+                            >
+                            <a
+                                href="https://github.com/fagp/caltus_API"
+                                target="_blank"
+                                className="sidebar-btn"
+                                rel="noopener noreferrer"
+                            >
+                            <FiGithub />
+                            </a>
+                        </div>
+                        </SidebarFooter>
                     </ProSidebar>
-                    <FiCornerUpLeft className="backIcon" color={"black"} onClick={() => updatePickModel(false)} />
                     <div className="homepage-container">
-                    <Modelswipe
-                        photosDic={photosDic}
-                        API_MODEL={API_MODEL}
-                        selectModel={selectModel}
-                    />
+                        Try to select a model below:
+                        <Modelswipe
+                            photosDic={photosDic}
+                            API_MODEL={API_MODEL}
+                            selectModel={selectModel}
+                        />
                     </div>
                 </div>
             :

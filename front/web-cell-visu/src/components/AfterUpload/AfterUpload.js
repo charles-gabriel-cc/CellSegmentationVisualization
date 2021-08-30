@@ -36,7 +36,7 @@ import './AfterUpload.scss'
 
 const AfterUpload = (props) => {
 
-    const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
+    const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
 
     const JSON_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 9;
 

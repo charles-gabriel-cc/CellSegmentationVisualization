@@ -6,7 +6,7 @@ import saveAs from 'jszip'
 
 const Download = (props) => {
 
-	const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
+	const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
 
 	const ZIP_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 11;
 

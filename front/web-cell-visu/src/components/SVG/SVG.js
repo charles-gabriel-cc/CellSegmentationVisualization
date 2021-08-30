@@ -7,7 +7,7 @@ import * as d3 from 'd3'
 
 const SVG = (props) => {
 
-    const API_IMAGE_ENDPOINT = "http://localhost:5000/result/image/"
+    const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
 
     const SVG_ENDPOINT = API_IMAGE_ENDPOINT + props.imageId + '/' + 10;
 

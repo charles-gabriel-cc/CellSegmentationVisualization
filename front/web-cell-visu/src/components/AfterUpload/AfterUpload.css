@@ -13,17 +13,15 @@
 }
 
 .loading-container{
-    position: absolute;
-    left: 15vw;
-    width:70vw;
-    height: 70vh;
+
+    width:100vw;
+    height: 100vh;
     background-color: var(--color-dark-darker);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    border: 2px solid var(--color-dark-text);;
+    text-align: center;
 }
 
 .results-container{
@@ -57,7 +55,7 @@
 .sidebar-btn-wrapper .sidebar-btn {
     padding: 10px 10px;
     border-radius: 40px;
-    background: var(--color-dark);
+    background: var(--color-dark-lighter);
     color: var(--color-dark-text);;
     font-size: 1.2rem;
     text-decoration: none;
