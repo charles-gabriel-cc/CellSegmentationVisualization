@@ -100,7 +100,6 @@ const HomepageContainer = (props) => {
 
 
     const selectModel = (model, description) => {
-        alert("Model switched")
         updateModel(model)
         setDescription(description);
     }
