@@ -191,6 +191,7 @@ const HomepageContainer = (props) => {
         !imagePath ?
             !pickModel ?
                 <div className="homepage-container-body">
+                <img className="background-bg" src={cellImg}></img>
                 <ProSidebar collapsed={collapsed} toggled={true} style={{borderRight: "1px solid black" }}>
                     <SidebarHeader>
                         <div
@@ -260,6 +261,7 @@ const HomepageContainer = (props) => {
                 </div>
                 :
                 <div className="homepage-container-body">
+                    <img className="background-bg" src={cellImg}></img>
                     <ProSidebar collapsed={collapsed} toggled={true} style={{borderRight: "1px solid black" }}>
                         <SidebarHeader>
                             <div

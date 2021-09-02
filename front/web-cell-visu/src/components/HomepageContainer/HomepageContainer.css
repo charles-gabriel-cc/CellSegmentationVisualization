@@ -4,6 +4,14 @@
     display: flex;
     justify-content: left;
     position: fixed;
+    
+}
+.background-bg{
+    opacity: 0.3;
+    position: absolute;
+    right: 0;
+    bottom:0;
+    max-width: 20rem;
 }
 .pro-sidebar{
     position: fixed;

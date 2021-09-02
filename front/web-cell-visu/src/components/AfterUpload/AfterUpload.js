@@ -34,6 +34,8 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import './AfterUpload.css'
 import './AfterUpload.scss'
 
+import cellSvg from '../../assets/black-white-cells.svg'
+
 const AfterUpload = (props) => {
 
     const API_IMAGE_ENDPOINT = "https://www.jcell.org:3984/result/image/"
@@ -190,6 +192,7 @@ const AfterUpload = (props) => {
         <div>
         {!props.pollingState || !newPaths ? undefined :
         <div className="after-upload-container">
+            <img className="background-bg" src={cellSvg}></img>
             <ProSidebar collapsed={collapsed} style={{borderRight: "1px solid black" }}>
                 <SidebarHeader>
                     <div
